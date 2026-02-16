@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abroa Studio | Strategic Brand & Web Design</title>
+    <meta name="description"
+        content="Strategic Brand & Web Designer for growing businesses. Minimal, premium, and studio-level digital experiences.">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div id="loader"
+        style="position: fixed; inset: 0; background-color: var(--color-bg); z-index: 9999; display: flex; justify-content: center; align-items: center;">
+        <div class="loader-container" style="position: relative; width: 300px; height: 150px;">
+            <div class="center-text"
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--color-text-primary); font-size: 3rem; font-weight: 700; font-family: sans-serif; letter-spacing: -2px;">
+                A</div>
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"
+                style="width: 100%; height: 100%; overflow: visible;">
+                <defs>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+                        <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <path class="infinity-path-bg"
+                    d="M150,75 C180,75 220,115 260,115 C285,115 295,95 295,75 C295,55 285,35 260,35 C220,35 180,75 150,75 C120,75 80,35 40,35 C15,35 5,55 5,75 C5,95 15,115 40,115 C80,115 120,75 150,75 z"
+                    fill="none" stroke="#222" stroke-width="2" opacity="0.3" />
+                <path class="infinity-glow-stroke"
+                    d="M150,75 C180,75 220,115 260,115 C285,115 295,95 295,75 C295,55 285,35 260,35 C220,35 180,75 150,75 C120,75 80,35 40,35 C15,35 5,55 5,75 C5,95 15,115 40,115 C80,115 120,75 150,75 z"
+                    fill="none" stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round"
+                    stroke-dasharray="60 760" stroke-dashoffset="0" filter="drop-shadow(0 0 8px var(--color-accent))"
+                    style="animation: strokeTravel 3s linear infinite;" />
+                <g class="pen-tip"
+                    style="offset-path: path('M150,75 C180,75 220,115 260,115 C285,115 295,95 295,75 C295,55 285,35 260,35 C220,35 180,75 150,75 C120,75 80,35 40,35 C15,35 5,55 5,75 C5,95 15,115 40,115 C80,115 120,75 150,75 z'); offset-rotate: auto 180deg; animation: penTravel 3s linear infinite; transform-box: fill-box; transform-origin: center;">
+                    <path class="pen-shape" d="M-10,-4 L0,0 L-10,4 L-8,0 Z" fill="var(--color-accent)" />
+                </g>
+            </svg>
+        </div>
+        <style>
+            @keyframes strokeTravel {
+                to {
+                    stroke-dashoffset: -820;
+                }
+            }
+
+            @keyframes penTravel {
+                0% {
+                    offset-distance: 0%;
+                }
+
+                100% {
+                    offset-distance: 100%;
+                }
+            }
+        </style>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" style="display: none; opacity: 0; transition: opacity 1s ease;">
+
+        <!-- Navigation -->
+        <nav style="padding: 40px 0; position: absolute; width: 100%; top: 0; z-index: 10;">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em;">Abroa Studio</div>
+                <ul style="display: flex; gap: 40px;">
+                    <li><a href="#work" class="nav-link text-body" style="font-size: 0.9rem;">Work</a></li>
+                    <li><a href="public/projects/index.html" class="nav-link text-body"
+                            style="font-size: 0.9rem;">Projects</a></li>
+                    <li><a href="public/mockups/index.html" class="nav-link text-body"
+                            style="font-size: 0.9rem;">Mockups</a></li>
+                    <li><a href="public/journal/index.html" class="nav-link text-body"
+                            style="font-size: 0.9rem;">Journal</a></li>
+                    <li><a href="#about" class="nav-link text-body" style="font-size: 0.9rem;">About</a></li>
+                    <li><a href="public/collaborate.html" class="nav-link text-body"
+                            style="font-size: 0.9rem;">Collaborate</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="section" style="padding-top: 200px; min-height: 90vh; display: flex; align-items: center;">
+            <div class="container">
+                <span class="text-eyebrow fade-in-up">Strategic Design Partner</span>
+                <h1 class="hero-text fade-in-up" style="max-width: 900px; margin-bottom: 40px; transition-delay: 0.1s;">
+                    Building digital presence for brands that value clarity, strategy, and aesthetics.
+                </h1>
+                <div class="fade-in-up" style="transition-delay: 0.2s; display: flex; gap: 20px;">
+                    <a href="#work" class="btn btn-primary">View Selected Works</a>
+                    <a href="#contact" class="btn btn-outline">Start a Project</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Works -->
+        <section id="work" class="section">
+            <div class="container">
+                <div class="fade-in-up"
+                    style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 60px;">
+                    <h2 class="section-title">Selected Works</h2>
+                    <a href="#" class="text-body nav-link" style="font-size: 0.9rem;">View All Projects -></a>
+                </div>
+
+                <div class="grid grid-2" style="row-gap: 80px;">
+                    <!-- Project 1 -->
+                    <article class="fade-in-up">
+                        <a href="public/projects/project-1.html" class="img-hover-zoom"
+                            style="background: #1a1a1a; aspect-ratio: 16/9; margin-bottom: 24px;"></a>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Lumina Architecture</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">Brand Identity & Web Design</p>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="fade-in-up" style="transition-delay: 0.1s;">
+                        <a href="#" class="img-hover-zoom"
+                            style="background: #1a1a1a; aspect-ratio: 16/9; margin-bottom: 24px;"></a>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Vanguard Finance</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">Product Design UI/UX</p>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="fade-in-up">
+                        <a href="#" class="img-hover-zoom"
+                            style="background: #1a1a1a; aspect-ratio: 16/9; margin-bottom: 24px;"></a>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Aesop Interiors</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">eCommerce Strategy</p>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="fade-in-up" style="transition-delay: 0.1s;">
+                        <a href="#" class="img-hover-zoom"
+                            style="background: #1a1a1a; aspect-ratio: 16/9; margin-bottom: 24px;"></a>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Mono Coffee</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">Visual Identity</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section" style="background-color: var(--color-bg-alt);">
+            <div class="container">
+                <div class="grid grid-2" style="align-items: center;">
+                    <div class="fade-in-up">
+                        <span class="text-eyebrow">The Philosophy</span>
+                        <h2 class="section-title" style="margin-bottom: 32px; max-width: 400px;">Design is not just
+                            about how it looks, but how it works.</h2>
+                        <p class="text-body" style="margin-bottom: 24px; max-width: 480px;">
+                            We bridge the gap between business strategy and creative execution. We don't just build
+                            websites; we build confident digital platforms that help businesses grow.
+                        </p>
+                        <p class="text-body" style="margin-bottom: 40px; max-width: 480px;">
+                            Minimalism isn't about having less. It's about making room for what truly matters—your
+                            message, your value, and your impact.
+                        </p>
+                        <a href="#about" class="nav-link text-body">Read our Story -></a>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.2s;">
+                        <!-- Placeholder for Portrait -->
+                        <div
+                            style="aspect-ratio: 3/4; background: #222; width: 100%; max-width: 400px; margin-left: auto;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="section">
+            <div class="container">
+                <span class="text-eyebrow fade-in-up">Our Capabilities</span>
+                <div class="grid grid-3" style="margin-top: 40px;">
+                    <div class="fade-in-up" style="border-top: 1px solid var(--color-border); padding-top: 24px;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 16px;">Brand Identity</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">Logo design, visual systems, and brand
+                            guidelines that set you apart.</p>
+                    </div>
+                    <div class="fade-in-up"
+                        style="transition-delay: 0.1s; border-top: 1px solid var(--color-border); padding-top: 24px;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 16px;">Web Design & Dev</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">Custom, high-performance websites built for
+                            conversion and aesthetics.</p>
+                    </div>
+                    <div class="fade-in-up"
+                        style="transition-delay: 0.2s; border-top: 1px solid var(--color-border); padding-top: 24px;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 16px;">Creative Direction</h3>
+                        <p class="text-body" style="font-size: 0.95rem;">Overall visual strategy to ensure consistency
+                            across all touchpoints.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section" style="padding-bottom: 120px;">
+            <div class="container" style="text-align: center;">
+                <span class="text-eyebrow fade-in-up">Start a Conversation</span>
+                <h2 class="hero-text fade-in-up" style="margin-bottom: 40px;">Have a project in mind?</h2>
+                <div class="fade-in-up" style="transition-delay: 0.1s;">
+                    <a href="mailto:hello@abroastudio.com" class="btn btn-primary">Email Us: hello@abroastudio.com</a>
+                </div>
+            </div>
+        </section>
+
+        <footer style="border-top: 1px solid var(--color-border); padding: 40px 0;">
+            <div class="container"
+                style="display: flex; justify-content: space-between; color: var(--color-text-secondary); font-size: 0.875rem;">
+                <div>© 2026 Abroa Studio. All Rights Reserved.</div>
+                <div style="display: flex; gap: 24px;">
+                    <a href="#" class="nav-link">Instagram</a>
+                    <a href="#" class="nav-link">LinkedIn</a>
+                    <a href="#" class="nav-link">Twitter</a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

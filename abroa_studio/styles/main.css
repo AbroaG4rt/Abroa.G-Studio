@@ -1,0 +1,357 @@
+/* settings: "Inter" font via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Color System */
+    --color-bg: #0E0E0E;
+    --color-bg-alt: #151515;
+    --color-text-primary: #F5F5F5;
+    --color-text-secondary: #B5B5B5;
+    --color-accent: #D4C5A5;
+    --color-border: #222222;
+
+    /* Typography */
+    --font-primary: 'Inter', sans-serif;
+    --font-size-hero: clamp(3rem, 5vw, 4.5rem);
+    /* 48px - 72px */
+    --font-size-h2: clamp(2rem, 3vw, 2.5rem);
+    /* 32px - 40px */
+    --font-size-h3: 1.5rem;
+    /* 24px */
+    --font-size-body: 1.125rem;
+    /* 18px */
+    --font-size-small: 0.875rem;
+    /* 14px */
+
+    /* Spacing */
+    --spacing-unit: 8px;
+    --spacing-xs: calc(var(--spacing-unit) * 2);
+    /* 16px */
+    --spacing-sm: calc(var(--spacing-unit) * 4);
+    /* 32px */
+    --spacing-md: calc(var(--spacing-unit) * 8);
+    /* 64px */
+    --spacing-lg: calc(var(--spacing-unit) * 15);
+    /* 120px */
+    --spacing-xl: calc(var(--spacing-unit) * 20);
+    /* 160px */
+
+    /* Layout */
+    --container-width: 1200px;
+    --grid-gap: 24px;
+
+    /* Animation - Premium & Subtle */
+    --transition-fast: 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+    /* Slightly slower than 0.2 for elegance */
+    --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    /* extended to 0.6s */
+    --transition-reveal: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* For page load reveals */
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Typography Utilities */
+.hero-text {
+    font-size: var(--font-size-hero);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-title {
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.text-body {
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
+}
+
+.text-eyebrow {
+    font-size: var(--font-size-small);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-xs);
+    display: block;
+    font-weight: 500;
+}
+
+/* Layout Utilities */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+.section {
+    padding: var(--spacing-lg) 0;
+}
+
+.grid {
+    display: grid;
+    gap: var(--grid-gap);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: var(--spacing-md) 0;
+    }
+}
+
+/* Components */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    /* Explicitly small lift */
+}
+
+.btn-primary {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    /* Transform handled by generic .btn hover */
+}
+
+.btn-outline {
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.btn-outline:hover {
+    border-color: var(--color-text-primary);
+    background-color: transparent;
+}
+
+/* Scroll Animations (Utility Class) */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Reduced from 30px for subtlety */
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Journal / Editorial Typography */
+.article-content {
+    max-width: 740px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+.article-content p {
+    margin-bottom: 24px;
+}
+
+.article-intro {
+    font-size: 1.35rem;
+    /* ~21-22px */
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.article-content h2 {
+    font-size: 2rem;
+    color: var(--color-text-primary);
+    margin-top: 60px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.article-content h3 {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.article-content blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 32px;
+    margin: 40px 0;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+}
+
+.article-content img {
+    margin: 40px 0;
+    width: 100%;
+    height: auto;
+}
+
+/* Journal Grid Item */
+.journal-card {
+    display: block;
+    margin-bottom: 80px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.journal-card-image {
+    aspect-ratio: 16/9;
+    background: #1a1a1a;
+    width: 100%;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.journal-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journal-card:hover .journal-card-image img {
+    transform: scale(1.03);
+}
+
+.journal-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.journal-read-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 4px;
+    color: var(--color-text-primary);
+    transition: border-color 0.3s;
+}
+
+.journal-read-link:hover {
+    border-color: var(--color-accent);
+}
+
+/* Image Hover Zoom - Subtle */
+.img-hover-zoom {
+    overflow: hidden;
+    display: block;
+}
+
+.img-hover-zoom img {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.03);
+    /* Max 1.03 */
+}
+
+/* Navigation Line Animation */
+.nav-link {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-accent);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
