@@ -8,25 +8,195 @@
     <meta name="description"
         content="Start a project with Abroa Studio. Brand identity, web design, and digital strategy.">
     <link rel="stylesheet" href="../styles/main.css">
+<style>
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--color-bg);
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+}
+
+.nav-menu a.active {
+    color: var(--color-accent);
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* SEARCH */
+.search-box input {
+    padding: 6px 10px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-primary);
+}
+
+/* FORM CARD STYLE */
+.form-card {
+    background: rgba(255,255,255,0.02);
+    padding: 60px;
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+}
+
+/* FORM IMPROVEMENT */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    padding: 14px 16px;
+    border: 1px solid var(--color-border);
+    background: black;
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+}
+
+.form-textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* SUCCESS MESSAGE */
+.success-message {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+/* BACK TO TOP */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 10px 14px;
+    border: none;
+    background: var(--color-accent);
+    color: #e7f7a3;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+
+    .nav-menu {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        flex-direction: column;
+        background: var(--color-bg);
+        width: 220px;
+        padding: 20px;
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .form-card {
+        padding: 30px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <nav style="padding: 40px 0; position: absolute; width: 100%; top: 0; z-index: 10;">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="../index.html" style="font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em;">Abroa
-                Studio</a>
-            <ul style="display: flex; gap: 40px;">
-                <li><a href="../index.html#work" class="nav-link text-body" style="font-size: 0.9rem;">Work</a></li>
-                <li><a href="projects/index.html" class="nav-link text-body" style="font-size: 0.9rem;">Projects</a>
-                </li>
-                <li><a href="mockups/index.html" class="nav-link text-body" style="font-size: 0.9rem;">Mockups</a></li>
-                <li><a href="journal/index.html" class="nav-link text-body" style="font-size: 0.9rem;">Journal</a></li>
-                <li><a href="collaborate.html" class="nav-link text-body"
-                        style="font-size: 0.9rem; color: var(--color-text-primary);">Collaborate</a></li>
-            </ul>
+    <nav class="navbar">
+    <div class="container nav-wrapper">
+
+        <a href="../index.html" class="logo">Abroa Studio</a>
+
+        <div class="hamburger" id="hamburger">☰</div>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#work">Work</a></li>
+            <li><a href="projects/index.html">Projects</a></li>
+            <li><a href="mockups/index.html">Mockups</a></li>
+            <li><a href="journal/index.html">Journal</a></li>
+            <li><a href="collaborate.html" class="active">Collaborate</a></li>
+        </ul>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search...">
         </div>
-    </nav>
+
+    </div>
+</nav>
 
     <main id="main-content">
 
@@ -38,7 +208,7 @@
                         Let’s Build Something<br>Meaningful Together.
                     </h1>
 
-                    <form id="collabForm" class="fade-in-up" style="transition-delay: 0.2s;">
+                  <form id="collabForm" class="fade-in-up form-card">
 
                         <div class="grid grid-2" style="column-gap: 40px;">
                             <div class="form-group">
@@ -153,6 +323,43 @@
             }, 1500);
         });
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Hamburger
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+
+    // Back To Top
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+        backToTop.classList.toggle("show", window.scrollY > 300);
+    });
+
+    backToTop.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // Search redirect
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            window.location.href = "journal/index.html";
+        }
+    });
+
+});
+</script>
+    <button id="backToTop">↑</button>
 </body>
 
 </html>
