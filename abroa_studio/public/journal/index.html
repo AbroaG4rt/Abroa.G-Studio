@@ -7,30 +7,167 @@
     <title>Journal - Abroa Studio</title>
     <meta name="description" content="Thoughts on strategy, design, and business growth by Abroa Studio.">
     <link rel="stylesheet" href="../../styles/main.css">
+
+    <style>
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--color-bg);
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+}
+
+.nav-menu a.active {
+    color: var(--color-accent);
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Search */
+.search-box input {
+    padding: 6px 10px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-primary);
+}
+
+/* Journal Grid */
+.journal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.journal-card {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 40px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+    .nav-menu {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        flex-direction: column;
+        background: var(--color-bg);
+        width: 220px;
+        padding: 20px;
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .journal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text {
+        font-size: 2rem !important;
+    }
+
+    section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+/* Back To Top */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 10px 14px;
+    border: none;
+    background: var(--color-accent);
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+</style>
 </head>
 
 <body>
 
-    <nav style="padding: 40px 0; position: absolute; width: 100%; top: 0; z-index: 10;">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="../../index.html" style="font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em;">Abroa
-                Studio</a>
-            <ul style="display: flex; gap: 40px;">
-                <li><a href="../../index.html#work" class="nav-link text-body" style="font-size: 0.9rem;">Work</a></li>
-                <li><a href="../projects/index.html" class="nav-link text-body" style="font-size: 0.9rem;">Projects</a>
-                </li>
-                <li><a href="../mockups/index.html" class="nav-link text-body" style="font-size: 0.9rem;">Mockups</a>
-                </li>
-                <li><a href="index.html" class="nav-link text-body"
-                        style="font-size: 0.9rem; color: var(--color-text-primary);">Journal</a></li>
-                <li><a href="../../index.html#about" class="nav-link text-body" style="font-size: 0.9rem;">About</a>
-                </li>
-                <li><a href="../collaborate.html" class="nav-link text-body" style="font-size: 0.9rem;">Collaborate</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <nav class="navbar">
+    <div class="container nav-wrapper">
 
+        <a href="../../index.html" class="logo">Abroa Studio</a>
+
+        <div class="hamburger" id="hamburger">☰</div>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../index.html#work">Work</a></li>
+            <li><a href="../projects/index.html">Projects</a></li>
+            <li><a href="../mockups/index.html">Mockups</a></li>
+            <li><a href="index.html" class="active">Journal</a></li>
+            <li><a href="../../index.html#about">About</a></li>
+            <li><a href="../collaborate.html">Collaborate</a></li>
+        </ul>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search article...">
+        </div>
+
+    </div>
+</nav>
     <main id="main-content">
 
         <section class="section" style="padding-top: 200px; padding-bottom: 80px;">
@@ -38,7 +175,7 @@
                 <span class="text-eyebrow fade-in-up">Journal</span>
                 <h1 class="hero-text fade-in-up" style="margin-bottom: 80px;">Insights &<br>Observations</h1>
 
-                <div class="fade-in-up">
+                <div class="journal-grid fade-in-up">
 
                     <!-- Article 1 -->
                     <article class="journal-card">
@@ -121,6 +258,47 @@
     </main>
 
     <script src="../../scripts/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Hamburger
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+
+    // Back To Top
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+        backToTop.classList.toggle("show", window.scrollY > 300);
+    });
+
+    backToTop.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // Search filter
+    const searchInput = document.getElementById("searchInput");
+    const articles = document.querySelectorAll(".journal-card");
+
+    searchInput.addEventListener("keyup", function () {
+        let value = this.value.toLowerCase();
+
+        articles.forEach(article => {
+            let text = article.innerText.toLowerCase();
+            article.style.display = text.includes(value) ? "block" : "none";
+        });
+    });
+
+});
+</script>
+    <button id="backToTop">↑</button>
 </body>
 
 </html>
