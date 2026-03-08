@@ -96,7 +96,7 @@
 }
 
 .form-textarea {
-    min-height: 140px;
+    min-height: 200px;
     resize: vertical;
 }
 
@@ -208,12 +208,67 @@
                     <h1 class="hero-text fade-in-up" style="margin-bottom: 60px;">
                         Let’s Build Something<br>Meaningful Together.
                     </h1>
+<!-- Collaboration Categories -->
+<div class="form-card" style="margin-bottom:60px;">
 
+<h2 style="margin-bottom:30px;">Collaboration Opportunities</h2>
+
+<div class="grid grid-2" style="column-gap:40px; row-gap:20px;">
+
+<div>
+<h4>Creative Collaboration</h4>
+<p>Graphic Design, Brand Identity, UI/UX, Web Design, Motion Design, 3D Design, Illustration, Product Design, Packaging Design</p>
+</div>
+
+<div>
+<h4>Production Collaboration</h4>
+<p>Video Editor, Animator, Photographer, Videographer, Sound Designer</p>
+</div>
+
+<div>
+<h4>Technology Collaboration</h4>
+<p>Web Developer, App Developer, Frontend Developer, Backend Developer</p>
+</div>
+
+<div>
+<h4>Business Collaboration</h4>
+<p>Marketing Partner, Agency Partnership, Startup Collaboration, Investor Partner</p>
+</div>
+
+</div>
+
+</div>
+<!-- Collaboration Process -->
+<div class="form-card" style="margin-bottom:60px;">
+
+<h2 style="margin-bottom:30px;">Collaboration Process</h2>
+
+<ol style="line-height:2;">
+<li>Submit Collaboration Request</li>
+<li>Portfolio Review</li>
+<li>Project Discussion</li>
+<li>Agreement Signing</li>
+<li>Start Collaboration</li>
+</ol>
+
+</div>
+<!-- Collaboration Requirements -->
+<div class="form-card" style="margin-bottom:60px;">
+
+<h2 style="margin-bottom:30px;">Requirements</h2>
+
+<ul style="line-height:2;">
+<li>Portfolio or past work required</li>
+<li>Professional communication</li>
+<li>Ability to meet deadlines</li>
+<li>Experience in design tools (Figma, Adobe, Blender, etc)</li>
+</ul>
+
+</div>
                  <form 
-                     id="collabForm" 
-action="https://formspree.io/f/mgonvwgz"
-method="POST"
-class="fade-in-up form-card">
+                 id="collabForm" 
+                 action="https://formspree.io/f/mgonvwgz"
+                 method="POST"class="fade-in-up form-card">
 
 
                         <div class="grid grid-2" style="column-gap: 40px;">
@@ -228,35 +283,58 @@ class="fade-in-up form-card">
                                     placeholder="Enter your email" required>
                             </div>
                         </div>
-
+<div class="form-group">
+<label class="form-label">Country</label>
+<input type="text" name="country" class="form-input" placeholder="Your country">
+</div>
                         <div class="grid grid-2" style="column-gap: 40px;">
                             <div class="form-group">
                                 <label for="company" class="form-label">Company / Brand</label>
                                 <input type="text" id="company" name="company" class="form-input"
                                     placeholder="Brand name">
                             </div>
-                            <div class="form-group">
-                                <label for="service" class="form-label">Collaboration Type</label>
-                                <select id="service" name="service" class="form-select" required>
-                                    <option value="" disabled selected>Select an option</option>
-                                    <option value="brand-identity">Brand Identity</option>
-                                    <option value="web-design">Web Design & Development</option>
-                                    <option value="creative-direction">Creative Direction</option>
-                                    <option value="other">Other Inquiry</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="budget" class="form-label">Budget Range (USD)</label>
-                            <select id="budget" name="budget" class="form-select">
-                                <option value="" disabled selected>Select a range</option>
-                                <option value="5k-10k">$5k - $10k</option>
-                                <option value="10k-25k">$10k - $25k</option>
-                                <option value="25k-50k">$25k - $50k</option>
-                                <option value="50k+">$50k+</option>
-                            </select>
-                        </div>
+                        
+                            <div class="form-group">
+<label class="form-label">Field of Expertise</label>
+
+<select name="expertise" class="form-select" required>
+
+<option value="">Select expertise</option>
+
+<option>Graphic Design</option>
+<option>Brand Identity</option>
+<option>UI / UX Design</option>
+<option>Web Design</option>
+<option>Motion Design</option>
+<option>3D Design</option>
+<option>Illustration</option>
+<option>Video Editing</option>
+<option>Photography</option>
+<option>Frontend Development</option>
+<option>Backend Development</option>
+<option>Marketing</option>
+<option>Agency Partner</option>
+
+</select>
+<div class="form-group">
+<label class="form-label">Portfolio / Website</label>
+<input type="url" name="portfolio" class="form-input" placeholder="https://yourportfolio.com">
+</div>
+<div class="form-group">
+<label class="form-label">Years of Experience</label>
+
+<select name="experience" class="form-select">
+
+<option>0-1 years</option>
+<option>2-3 years</option>
+<option>4-6 years</option>
+<option>7+ years</option>
+
+</select>
+
+</div>
+</div>
 
                         <div class="form-group">
                             <label for="message" class="form-label">Project Details</label>
@@ -264,13 +342,39 @@ class="fade-in-up form-card">
                                 placeholder="Tell us about your goals, timeline, and inspiration..."
                                 required></textarea>
                         </div>
+<div class="form-group">
 
+<label style="display:flex; gap:10px; align-items:center;">
+
+<input type="checkbox" required>
+
+<span>
+I agree to the collaboration terms including NDA, intellectual property rights, payment agreement, and project scope.
+</span>
+
+</label>
+
+</div>
                         <div style="margin-top: 60px;">
                             <button type="submit" class="btn btn-primary" style="cursor: pointer;">Send Inquiry</button>
                         </div>
 
                     </form>
+<div class="form-card" style="margin-top:80px;">
 
+<h2 style="margin-bottom:30px;">Benefits of Collaborating with Abroa.G</h2>
+
+<ul style="line-height:2;">
+
+<li>Global creative projects</li>
+<li>Revenue sharing opportunities</li>
+<li>Creative freedom</li>
+<li>Professional creative network</li>
+<li>Portfolio exposure</li>
+
+</ul>
+
+</div>
                     <!-- Success Message -->
                     <div id="successMessage" class="success-message">
                         <div class="success-icon">✦</div>
@@ -374,5 +478,3 @@ form.addEventListener("submit", handleSubmit);
 </body>
 
 </html>
-
-
