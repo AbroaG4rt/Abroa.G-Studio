@@ -271,7 +271,7 @@
                  method="POST"class="fade-in-up form-card">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
-
+                <input type="hidden" name="_next" value="https://abroag.site/public/collaborate?success=true">
 
                         <div class="grid grid-2" style="column-gap: 40px;">
                             <div class="form-group">
@@ -501,9 +501,29 @@ btn.disabled = false;
 });
 
 </script>
+
+    <script>
+
+const params = new URLSearchParams(window.location.search);
+
+if(params.get("success") === "true"){
+
+document.getElementById("collabForm").style.display = "none";
+
+document.getElementById("successMessage").style.display = "block";
+
+window.scrollTo({
+top: document.getElementById("successMessage").offsetTop,
+behavior:"smooth"
+});
+
+}
+
+</script>
 </body>
 
 </html>
+
 
 
 
