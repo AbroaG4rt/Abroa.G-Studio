@@ -267,8 +267,10 @@
 </div>
                  <form 
                  id="collabForm" 
-                 action="https://formsubmit.co/abroa.gart@gmail.com"
+                 action="https://formsubmit.co/91da3cf4c24c244f19505e7bb5986259"
                  method="POST"class="fade-in-up form-card">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
 
 
                         <div class="grid grid-2" style="column-gap: 40px;">
@@ -347,7 +349,7 @@
 
 <label style="display:flex; gap:10px; align-items:center;">
 
-<input type="checkbox" required>
+<input type="checkbox" name="agreement" required>
 
 <span>
 I agree to the collaboration terms including NDA, intellectual property rights, payment agreement, and project scope.
@@ -445,26 +447,27 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
     <button id="backToTop">↑</button>
 
-    <script>
+   <script>
+
+const form = document.getElementById("collabForm");
 const btn = document.getElementById("submitBtn");
 
-btn.innerText = "Sending...";
-btn.disabled = true;
-const form = document.getElementById("collabForm");
-
-form.addEventListener("submit", async function(event) {
+form.addEventListener("submit", async function(event){
 
 event.preventDefault();
 
+btn.innerText = "Sending...";
+btn.disabled = true;
+
 const data = new FormData(form);
 
-try {
+try{
 
-const response = await fetch(form.action, {
-method: "POST",
-body: data,
-headers: {
-'Accept': 'application/json'
+const response = await fetch(form.action,{
+method:"POST",
+body:data,
+headers:{
+'Accept':'application/json'
 }
 });
 
@@ -476,18 +479,22 @@ document.getElementById("successMessage").style.display = "block";
 
 window.scrollTo({
 top: document.getElementById("successMessage").offsetTop,
-behavior: "smooth"
+behavior:"smooth"
 });
 
 }else{
 
 alert("Submission failed. Please try again.");
+btn.innerText = "Send Inquiry";
+btn.disabled = false;
 
 }
 
 }catch(error){
 
 alert("Network error. Please try again.");
+btn.innerText = "Send Inquiry";
+btn.disabled = false;
 
 }
 
@@ -497,6 +504,7 @@ alert("Network error. Please try again.");
 </body>
 
 </html>
+
 
 
 
