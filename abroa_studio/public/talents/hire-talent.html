@@ -243,7 +243,6 @@ Tell us about your project and we will match you with the right talent.
                  id="hiretalentform" 
                  action="https://formsubmit.co/91da3cf4c24c244f19505e7bb5986259"
                 method="POST"
-                     enctype="multipart/form-data"
                      class="fade-in-up form-card">
 
 <input type="hidden" name="_captcha" value="false">
@@ -410,26 +409,15 @@ Tell us about your project and we will match you with the right talent.
   </div>
 </div>
  <!-- Upload Files -->
-<label class="form-label">Upload Project Files</label>
-
-<p style="font-size:14px; opacity:.8; margin-bottom:10px;">
-Upload your files to Google Drive using the link below.
-</p>
-
-<a href="https://forms.gle/TJHyXk4HMd92W4Ts5"
-target="_blank"
-class="btn btn-outline">
-Upload Files
-</a>
-                            <h3 style="margin-top:60px;">Upload Project Files</h3>
-
-<iframe 
-src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true"
-width="100%"
-height="600"
-frameborder="0">
-Loading…
-</iframe>
+<div class="form-group">
+    <label class="form-label">Upload Files</label> 
+  <input 
+type="file" 
+id="fileInput"
+class="form-input">
+    </div>
+                            <div id="uploadStatus" style="margin-top:10px;font-size:14px;"></div>
+<progress id="uploadProgress" value="0" max="100" style="width:100%;display:none;"></progress>
  <!-- Additional Notes -->
 <div class="form-group">
 <label class="form-label">Additional Notes</label>
@@ -529,17 +517,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-    <button id="backToTop">↑</button>
-<script>
+    <script>
 setTimeout(function(){
 window.location.href = "/";
 },8000);
 </script>
-    
+    <skript>
+const fileInput = document.getElementById("fileInput");
+const progress = document.getElementById("uploadProgress");
+const status = document.getElementById("uploadStatus");
+
+const SCRIPT_URL = "PASTE_GOOGLE_SCRIPT_URL_HERE";
+
+fileInput.addEventListener("change", async function() {
+
+const file = fileInput.files[0];
+
+if(!file) return;
+
+progress.style.display="block";
+status.innerText="Uploading file...";
+
+const reader = new FileReader();
+
+reader.onload = async function(){
+
+const base64 = reader.result.split(",")[1];
+
+const formData = new FormData();
+formData.append("file", base64);
+formData.append("fileName", file.name);
+formData.append("mimeType", file.type);
+
+const xhr = new XMLHttpRequest();
+
+xhr.open("POST", SCRIPT_URL);
+
+xhr.upload.onprogress = function(e){
+
+if(e.lengthComputable){
+
+const percent = (e.loaded / e.total)*100;
+progress.value = percent;
+
+}
+
+};
+
+xhr.onload = function(){
+
+status.innerText="Upload complete ✓";
+
+};
+
+xhr.send(formData);
+
+};
+
+reader.readAsDataURL(file);
+
+});
+    </skript>
+    <button id="backToTop">↑</button>
 </body>
 
 
 </html>
+
 
 
 
