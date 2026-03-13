@@ -479,7 +479,8 @@ Abroa.G Studio will review the request and respond within 24–48 hours.
   
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
+                          </script>
+                          <script>
     // Hamburger
     const hamburger = document.getElementById("hamburger");
     const navMenu = document.getElementById("nav-menu");
@@ -510,22 +511,24 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "journal/index.html";
         }
     });
-
 });
 </script>
     
     <script>
+const form = document.getElementById("hiretalentform");
 const fileInput = document.getElementById("fileInput");
 const progress = document.getElementById("uploadProgress");
 const status = document.getElementById("uploadStatus");
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoDZ0t-6W6zKAXS6P9dYQlWICeFHoSzr8U4hPXg7KnTNGc_zh5c-RPxi3ugzJ6MehYXw/exec";
 
-fileInput.addEventListener("change", async function() {
+form.addEventListener("submit", async function(e){
 
 const file = fileInput.files[0];
 
 if(!file) return;
+
+e.preventDefault();
 
 progress.style.display="block";
 status.innerText="Uploading file...";
@@ -560,6 +563,8 @@ xhr.onload = function(){
 
 status.innerText="Upload complete ✓";
 
+form.submit();
+
 };
 
 xhr.send(formData);
@@ -575,6 +580,7 @@ reader.readAsDataURL(file);
 
 
 </html>
+
 
 
 
