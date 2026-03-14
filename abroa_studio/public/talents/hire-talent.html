@@ -173,6 +173,10 @@
     .hamburger {
         display: block;
     }
+.hamburger.active {
+transform: rotate(90deg);
+transition: 0.3s;
+}
 
     .search-box {
         display: none;
@@ -487,18 +491,29 @@ Abroa.G Studio will review the request and respond within 24–48 hours.
     <script src="/scripts/main.js"></script>
   
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-                          </script>
-                          <script>
-    // Hamburger
-    const hamburger = document.getElementById("hamburger");
-    const navMenu = document.getElementById("nav-menu");
 
-    hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Hamburger
+  const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("nav-menu");
+
+hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    hamburger.classList.toggle("active");
+});
+}
+const navLinks = document.querySelectorAll("#nav-menu a");
+
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
     });
+});
+    
 
     // Back To Top
+    
     const backToTop = document.getElementById("backToTop");
 
     window.addEventListener("scroll", () => {
@@ -517,11 +532,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchInput.addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
-            window.location.href = "journal/index.html";
+            window.location.href = "/public/journal/index.html";
         }
     });
+
 });
+
 </script>
+
     <button id="backToTop">↑</button>
 </body>
 
