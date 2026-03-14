@@ -491,50 +491,58 @@ Abroa.G Studio will review the request and respond within 24–48 hours.
     <script src="/scripts/main.js"></script>
   
 <script>
-
 document.addEventListener("DOMContentLoaded", function () {
 
     // Hamburger
-  const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("nav-menu");
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
 
-hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-    hamburger.classList.toggle("active");
-});
-}
-const navLinks = document.querySelectorAll("#nav-menu a");
+    if (hamburger && navMenu) {
 
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        navMenu.classList.remove("active");
-    });
-});
-    
+        hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+            hamburger.classList.toggle("active");
+        });
+
+        const navLinks = document.querySelectorAll("#nav-menu a");
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("active");
+                hamburger.classList.remove("active");
+            });
+        });
+
+    }
 
     // Back To Top
-    
     const backToTop = document.getElementById("backToTop");
 
-    window.addEventListener("scroll", () => {
-        backToTop.classList.toggle("show", window.scrollY > 300);
-    });
+    if (backToTop) {
 
-    backToTop.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        window.addEventListener("scroll", () => {
+            backToTop.classList.toggle("show", window.scrollY > 300);
         });
-    });
 
-    // Search redirect
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+    }
+
+    // Search
     const searchInput = document.getElementById("searchInput");
 
-    searchInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            window.location.href = "/public/journal/index.html";
-        }
-    });
+    if (searchInput) {
+        searchInput.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                window.location.href = "/public/journal/index.html";
+            }
+        });
+    }
 
 });
 
