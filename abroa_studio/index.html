@@ -60,6 +60,8 @@
                     offset-distance: 100%;
                 }
             }
+
+            
         </style>
     </div>
 
@@ -205,7 +207,42 @@
                 </div>
             </div>
         </section>
+       <!-- Logo Slider --> 
+<section class="brand-slider">
+<div class="container">
 
+<p class="text-eyebrow" style="text-align:center;margin-bottom:40px;">
+Trusted by Brands Worldwide
+</p>
+
+<div class="logo-slider">
+
+<div class="logo-track">
+
+<img src="images/brands/brand1.svg">
+<img src="images/brands/brand2.svg">
+<img src="images/brands/brand3.svg">
+<img src="images/brands/brand4.svg">
+<img src="images/brands/brand5.svg">
+<img src="images/brands/brand6.svg">
+
+<!-- duplicate for infinite loop -->
+
+<img src="images/brands/brand1.svg">
+<img src="images/brands/brand2.svg">
+<img src="images/brands/brand3.svg">
+<img src="images/brands/brand4.svg">
+<img src="images/brands/brand5.svg">
+<img src="images/brands/brand6.svg">
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+        
         <!-- Contact Section -->
         <section id="contact" class="section" style="padding-bottom: 120px;">
             <div class="container" style="text-align: center;">
@@ -321,20 +358,6 @@ searchInput.addEventListener("keyup", function () {
     color: var(--color-text-primary);
 }
 
-/* Back To Top */
-#backToTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    padding: 10px 14px;
-    font-size: 16px;
-    border: none;
-    background: var(--color-accent);
-    color: white;
-    cursor: pointer;
-    display: none;
-}
-
 /* RESPONSIVE */
 @media (max-width: 1024px) {
 
@@ -374,7 +397,65 @@ searchInput.addEventListener("keyup", function () {
     }
 
 }
+/* BRAND LOGO SLIDER */
 
+.brand-slider{
+padding:80px 0;
+overflow:hidden;
+background:var(--color-bg);
+}
+
+.logo-slider{
+overflow:hidden;
+position:relative;
+}
+
+.logo-track{
+display:flex;
+gap:80px;
+width:max-content;
+animation:scrollLogo 25s linear infinite;
+align-items:center;
+}
+
+.logo-track img{
+height:40px;
+opacity:.6;
+filter:grayscale(100%);
+transition:.3s;
+}
+
+.logo-track img:hover{
+opacity:1;
+filter:none;
+}
+
+@keyframes scrollLogo{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-50%);
+}
+.backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: none;
+    background: var(--color-accent);
+    color: white;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+}
+
+}
+
+        
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -401,19 +482,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <button id="backToTop">↑</button>
-<style>#backToTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    padding: 10px 14px;
-    font-size: 16px;
-    border: none;
-    background: var(--color-accent);
-    color: white;
-    cursor: pointer;
-    display: none;
-    z-index: 999;
-}</style>
 </body>
 
 </html>
