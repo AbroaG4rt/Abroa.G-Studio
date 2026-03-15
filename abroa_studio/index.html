@@ -207,42 +207,92 @@
                 </div>
             </div>
         </section>
-       <!-- Logo Slider --> 
+       <!-- Brand Logo Slider -->
+
 <section class="brand-slider">
-<div class="container">
 
-<p class="text-eyebrow" style="text-align:center;margin-bottom:40px;">
-Trusted by Brands Worldwide
-</p>
+<div class="brand-track">
 
+<div class="brand-logo">
+<img src="images/brand1.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand2.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand3.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand4.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand5.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand6.png">
+</div>
+
+<!-- DUPLICATE FOR INFINITE LOOP -->
+
+<div class="brand-logo">
+<img src="images/brand1.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand2.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand3.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand4.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand5.png">
+</div>
+
+<div class="brand-logo">
+<img src="images/brand6.png">
+</div>
+
+</div>
+</section>
+
+        <!-- Logo Slider Right -->
+<section class="logo-slider-section">
 <div class="logo-slider">
 
 <div class="logo-track">
 
-<img src="images/brands/brand1.svg">
-<img src="images/brands/brand2.svg">
-<img src="images/brands/brand3.svg">
-<img src="images/brands/brand4.svg">
-<img src="images/brands/brand5.svg">
-<img src="images/brands/brand6.svg">
+<img src="images/logo1.svg">
+<img src="images/logo2.svg">
+<img src="images/logo3.svg">
+<img src="images/logo4.svg">
+<img src="images/logo5.svg">
+<img src="images/logo6.svg">
 
-<!-- duplicate for infinite loop -->
+<!-- DUPLICATE (important for infinite loop) -->
 
-<img src="images/brands/brand1.svg">
-<img src="images/brands/brand2.svg">
-<img src="images/brands/brand3.svg">
-<img src="images/brands/brand4.svg">
-<img src="images/brands/brand5.svg">
-<img src="images/brands/brand6.svg">
-
-</div>
+<img src="images/logo1.svg">
+<img src="images/logo2.svg">
+<img src="images/logo3.svg">
+<img src="images/logo4.svg">
+<img src="images/logo5.svg">
+<img src="images/logo6.svg">
 
 </div>
+
 </div>
 </section>
 
-
-        
         <!-- Contact Section -->
         <section id="contact" class="section" style="padding-bottom: 120px;">
             <div class="container" style="text-align: center;">
@@ -439,6 +489,51 @@ transform:translateX(0);
 100%{
 transform:translateX(-50%);
 }
+/* LOGO SLIDER Right  */
+
+.logo-slider-section{
+overflow:hidden;
+padding:80px 0;
+border-top:1px solid var(--color-border);
+border-bottom:1px solid var(--color-border);
+background:var(--color-bg);
+}
+
+.logo-slider{
+width:100%;
+overflow:hidden;
+position:relative;
+}
+
+.logo-track{
+display:flex;
+gap:80px;
+width:max-content;
+animation:logoScroll 25s linear infinite;
+align-items:center;
+}
+
+.logo-track img{
+height:40px;
+opacity:0.6;
+filter:grayscale(100%);
+transition:0.3s;
+}
+
+.logo-track img:hover{
+opacity:1;
+filter:none;
+}
+
+@keyframes logoScroll{
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-50%);
+}
+    
 .backToTop {
     position: fixed;
     bottom: 30px;
