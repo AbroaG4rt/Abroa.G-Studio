@@ -207,91 +207,52 @@
                 </div>
             </div>
         </section>
-       <!-- Brand Logo Slider -->
+      <!-- Brand Logos Slider -->
 
 <section class="brand-slider">
 
-<div class="brand-track">
+<!-- Slider 1 -->
+<div class="brand-track slider-left">
 
-<div class="brand-logo">
-<img src="images/brand1.png">
-</div>
+<img src="images/logos/1.svg">
+<img src="images/logos/2.svg">
+<img src="images/logos/3.svg">
+<img src="images/logos/4.svg">
+<img src="images/logos/5.svg">
+<img src="images/logos/6.svg">
 
-<div class="brand-logo">
-<img src="images/brand2.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand3.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand4.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand5.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand6.png">
-</div>
-
-<!-- DUPLICATE FOR INFINITE LOOP -->
-
-<div class="brand-logo">
-<img src="images/brand1.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand2.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand3.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand4.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand5.png">
-</div>
-
-<div class="brand-logo">
-<img src="images/brand6.png">
-</div>
+<!-- duplicate for infinite -->
+<img src="images/logos/1.svg">
+<img src="images/logos/2.svg">
+<img src="images/logos/3.svg">
+<img src="images/logos/4.svg">
+<img src="images/logos/5.svg">
+<img src="images/logos/6.svg">
 
 </div>
+
+<!-- Slider 2 -->
+<div class="brand-track slider-right">
+
+<img src="images/logos/7.svg">
+<img src="images/logos/8.svg">
+<img src="images/logos/9.svg">
+<img src="images/logos/10.svg">
+<img src="images/logos/11.svg">
+<img src="images/logos/12.svg">
+
+<!-- duplicate -->
+<img src="images/logos/7.svg">
+<img src="images/logos/8.svg">
+<img src="images/logos/9.svg">
+<img src="images/logos/10.svg">
+<img src="images/logos/11.svg">
+<img src="images/logos/12.svg">
+
+</div>
+
 </section>
 
-        <!-- Logo Slider Right -->
-<section class="logo-slider-section">
-<div class="logo-slider">
-
-<div class="logo-track">
-
-<img src="images/logo1.svg">
-<img src="images/logo2.svg">
-<img src="images/logo3.svg">
-<img src="images/logo4.svg">
-<img src="images/logo5.svg">
-<img src="images/logo6.svg">
-
-<!-- DUPLICATE (important for infinite loop) -->
-
-<img src="images/logo1.svg">
-<img src="images/logo2.svg">
-<img src="images/logo3.svg">
-<img src="images/logo4.svg">
-<img src="images/logo5.svg">
-<img src="images/logo6.svg">
-
-</div>
-
-</div>
-</section>
 
         <!-- Contact Section -->
         <section id="contact" class="section" style="padding-bottom: 120px;">
@@ -329,6 +290,7 @@ const navMenu = document.getElementById("nav-menu");
 
 hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
+    hamburger.classList.toggle("active");
 });
 
 // Back to top
@@ -351,13 +313,15 @@ backToTop.addEventListener("click", () => {
 
 // Simple Search Filter
 const searchInput = document.getElementById("searchInput");
+if (searchInput) {
 const projects = document.querySelectorAll("#work article");
-
+}
 searchInput.addEventListener("keyup", function () {
     let value = this.value.toLowerCase();
     projects.forEach(project => {
         let text = project.innerText.toLowerCase();
         project.style.display = text.includes(value) ? "block" : "none";
+    
     });
 });
 
@@ -449,91 +413,58 @@ searchInput.addEventListener("keyup", function () {
 }
 /* BRAND LOGO SLIDER */
 
-.brand-slider{
-padding:80px 0;
-overflow:hidden;
-background:var(--color-bg);
+.brand-slider {
+    overflow: hidden;
+    width: 100%;
+    margin: 80px 0;
 }
 
-.logo-slider{
-overflow:hidden;
-position:relative;
+.brand-track {
+    display: flex;
+    gap: 80px;
+    width: max-content;
 }
 
-.logo-track{
-display:flex;
-gap:80px;
-width:max-content;
-animation:scrollLogo 25s linear infinite;
-align-items:center;
+.brand-track img {
+    height: 32px;
+    opacity: 0.6;
+    filter: grayscale(1);
+    transition: 0.3s;
 }
 
-.logo-track img{
-height:40px;
-opacity:.6;
-filter:grayscale(100%);
-transition:.3s;
+.brand-track img:hover {
+    opacity: 1;
+    filter: grayscale(0);
 }
 
-.logo-track img:hover{
-opacity:1;
-filter:none;
+/* animation */
+
+.slider-left {
+    animation: scrollLeft 25s linear infinite;
 }
 
-@keyframes scrollLogo{
-
-0%{
-transform:translateX(0);
+.slider-right {
+    animation: scrollRight 25s linear infinite;
 }
 
-100%{
-transform:translateX(-50%);
-}
-/* LOGO SLIDER Right  */
-
-.logo-slider-section{
-overflow:hidden;
-padding:80px 0;
-border-top:1px solid var(--color-border);
-border-bottom:1px solid var(--color-border);
-background:var(--color-bg);
+@keyframes scrollLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
 
-.logo-slider{
-width:100%;
-overflow:hidden;
-position:relative;
+@keyframes scrollRight {
+    from {
+        transform: translateX(-50%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
-.logo-track{
-display:flex;
-gap:80px;
-width:max-content;
-animation:logoScroll 25s linear infinite;
-align-items:center;
-}
-
-.logo-track img{
-height:40px;
-opacity:0.6;
-filter:grayscale(100%);
-transition:0.3s;
-}
-
-.logo-track img:hover{
-opacity:1;
-filter:none;
-}
-
-@keyframes logoScroll{
-0%{
-transform:translateX(0);
-}
-
-100%{
-transform:translateX(-50%);
-}
-    
 .backToTop {
     position: fixed;
     bottom: 30px;
