@@ -491,28 +491,40 @@ searchInput.addEventListener("keyup", function () {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const backToTop = document.getElementById("backToTop");
+    // Hamburger
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
 
-    if (!backToTop) return; // safety check
-
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 300) {
-            backToTop.style.display = "block";
-        } else {
-            backToTop.style.display = "none";
-        }
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
     });
 
-    backToTop.addEventListener("click", function () {
+    // Back To Top
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+        backToTop.classList.toggle("show", window.scrollY > 300);
+    });
+
+    backToTop.addEventListener("click", () => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
     });
 
+    // Search redirect
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            window.location.href = "journal/index.html";
+        }
+    });
+
 });
 </script>
-<button id="backToTop">↑</button>
+    <button id="backToTop">↑</button>  
 </body>
 
 </html>
