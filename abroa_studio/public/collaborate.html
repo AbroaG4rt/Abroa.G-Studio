@@ -450,34 +450,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-    <button id="backToTop">↑</button>
-
- 
-
-  <script>
-
-window.scrollTo({
-top: document.getElementById("successMessage").offsetTop,
-behavior:"smooth"
-});
-
-}
-
-// Back to top safety
-const backToTop = document.getElementById("backToTop");
-
-if(backToTop){
-window.addEventListener("scroll", () => {
-backToTop.classList.toggle("show", window.scrollY > 300);
-});
-}
-
-</script>
-    <script>
-setTimeout(function(){
-window.location.href = "/";
-},8000);
-</script>
+    <button id="backToTop">↑</button>   
 </body>
 
 </html>
