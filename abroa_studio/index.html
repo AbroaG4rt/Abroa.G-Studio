@@ -285,26 +285,23 @@ Trusted by Brands Worldwide
     </main>
 
     <script src="scripts/main.js"></script>
-    <script>
+   <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-// Back to top
-const backToTop = document.getElementById("backToTop");
+    const backToTop = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-        backToTop.style.display = "block";
-    } else {
-        backToTop.style.display = "none";
-    }
-});
-
-backToTop.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    window.addEventListener("scroll", () => {
+        backToTop.classList.toggle("show", window.scrollY > 300);
     });
-});
 
+    backToTop.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+});
 </script>
     
     <style>
@@ -422,6 +419,7 @@ backToTop.addEventListener("click", () => {
     to {
         transform: translateX(-50%);
     }
+}
 
 @keyframes scrollRight {
     from {
@@ -430,19 +428,26 @@ backToTop.addEventListener("click", () => {
     to {
         transform: translateX(0);
     }
+}
 
 #backToTop {
     position: fixed;
     bottom: 30px;
     right: 30px;
     padding: 10px 14px;
-    font-size: 16px;
     border: none;
     background: var(--color-accent);
-    color: white;
+    color: #fff;
     cursor: pointer;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
     z-index: 999;
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 
