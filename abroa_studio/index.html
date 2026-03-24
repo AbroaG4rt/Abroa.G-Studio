@@ -49,7 +49,7 @@
                 to {
                     stroke-dashoffset: -820;
                 }
-            }
+        
 
             @keyframes penTravel {
                 0% {
@@ -59,7 +59,7 @@
                 100% {
                     offset-distance: 100%;
                 }
-            }
+        
 
             
         </style>
@@ -82,16 +82,14 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#work">Work</a></li>
             <li><a href="public/projects/index.html">Projects</a></li>
+            <li><a href="public/projects/index.html">Talents List</a></li>
             <li><a href="public/mockups/index.html">Mockups</a></li>
             <li><a href="public/journal/index.html">Journal</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="public/collaborate.html">Collaborate</a></li>
         </ul>
 
-        <!-- Search Bar -->
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search project...">
-        </div>
+    
     </div>
 </nav>
 
@@ -145,7 +143,7 @@
 
                     <!-- Project 4 -->
                     <article class="fade-in-up" style="transition-delay: 0.1s;">
-                        <a href="public/projects/case-study_ Luxury Watch.html" class="img-hover-zoom"
+                        <a href="public/projects/case-study-Luxury-Watch.html" class="img-hover-zoom"
                             style="background: #1a1a1a; aspect-ratio: 16/9; margin-bottom: 24px;"></a>
                         <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Mono Coffee</h3>
                         <p class="text-body" style="font-size: 0.95rem;">Visual Identity</p>
@@ -289,15 +287,6 @@ Trusted by Brands Worldwide
     <script src="scripts/main.js"></script>
     <script>
 
-// Hamburger toggle
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("nav-menu");
-
-hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-    hamburger.classList.toggle("active");
-});
-
 // Back to top
 const backToTop = document.getElementById("backToTop");
 
@@ -313,20 +302,6 @@ backToTop.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth"
-    });
-});
-
-// Simple Search Filter
-const searchInput = document.getElementById("searchInput");
-if (searchInput) {
-const projects = document.querySelectorAll("#work article");
-}
-searchInput.addEventListener("keyup", function () {
-    let value = this.value.toLowerCase();
-    projects.forEach(project => {
-        let text = project.innerText.toLowerCase();
-        project.style.display = text.includes(value) ? "block" : "none";
-    
     });
 });
 
@@ -369,14 +344,6 @@ searchInput.addEventListener("keyup", function () {
     cursor: pointer;
 }
 
-/* Search */
-.search-box input {
-    padding: 6px 10px;
-    border: 1px solid var(--color-border);
-    background: transparent;
-    color: var(--color-text-primary);
-}
-
 /* RESPONSIVE */
 @media (max-width: 1024px) {
 
@@ -397,10 +364,6 @@ searchInput.addEventListener("keyup", function () {
 
     .hamburger {
         display: block;
-    }
-
-    .search-box {
-        display: none;
     }
 
     .grid-3 {
@@ -459,7 +422,6 @@ searchInput.addEventListener("keyup", function () {
     to {
         transform: translateX(-50%);
     }
-}
 
 @keyframes scrollRight {
     from {
@@ -468,9 +430,8 @@ searchInput.addEventListener("keyup", function () {
     to {
         transform: translateX(0);
     }
-}
 
-.backToTop {
+#backToTop {
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -484,13 +445,12 @@ searchInput.addEventListener("keyup", function () {
     z-index: 999;
 }
 
-}
 
         
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
+});
     // Hamburger
     const hamburger = document.getElementById("hamburger");
     const navMenu = document.getElementById("nav-menu");
@@ -499,30 +459,6 @@ document.addEventListener("DOMContentLoaded", function () {
         navMenu.classList.toggle("active");
     });
 
-    // Back To Top
-    const backToTop = document.getElementById("backToTop");
-
-    window.addEventListener("scroll", () => {
-        backToTop.classList.toggle("show", window.scrollY > 300);
-    });
-
-    backToTop.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-
-    // Search redirect
-    const searchInput = document.getElementById("searchInput");
-
-    searchInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            window.location.href = "journal/index.html";
-        }
-    });
-
-});
 </script>
     <button id="backToTop">↑</button>  
 </body>
