@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Learning System Notion (JLPT)</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- International Telephone Input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.css">
+    
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --accent-red: #ef4444;       /* Modern Red */
+            --accent-red-hover: #dc2626; /* Darker Red for hover */
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-red: 0 10px 15px -3px rgba(239, 68, 68, 0.3);
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --container-max: 800px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Layout Utility */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .text-center { text-align: center; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+        .text-accent { color: var(--accent-red); }
+        .text-muted { color: var(--text-muted); }
+        
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Button Component */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-red);
+            color: white;
+            box-shadow: var(--shadow-red);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 20px -3px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* 1. Header (Sticky) */
+        .header-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .timer-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent-red);
+            background: #fef2f2;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .timer-badge i { font-size: 1.125rem; }
+        
+        .header-cta {
+            padding: 0.5rem 1.25rem;
+            font-size: 0.875rem;
+            width: auto;
+        }
+
+        /* 2. Hero Section */
+        .hero {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p.lead {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-mockup {
+            margin: 2.5rem 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            background: #f3f4f6; /* Placeholder gray */
+        }
+
+        /* Image Placeholder styling */
+        .placeholder-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16/9;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .placeholder-box i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #9ca3af;
+        }
+
+        .price-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-crossed {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .price-current {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .discount-badge {
+            background-color: var(--accent-red);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* 3. Product Preview (Video) */
+        .video-section {
+            background-color: var(--secondary-bg);
+        }
+
+        .ig-video-container {
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 8px solid white;
+            aspect-ratio: 4/5;
+            background: #000;
+            position: relative;
+        }
+
+        .ig-video-container video, .ig-video-container .placeholder-box {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #1f2937;
+            color: white;
+        }
+
+        /* 4. Problem Section */
+        .problem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--secondary-bg);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .problem-item i {
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            margin-top: 0.125rem;
+        }
+
+        .problem-item p { margin: 0; font-weight: 500; }
+
+        /* 5. Solution Section */
+        .solution {
+            background-color: var(--text-main);
+            color: white;
+        }
+
+        .solution .text-muted { color: #9ca3af; }
+        .solution .section-title { color: white; }
+
+        .solution-visual {
+            margin-top: 2.5rem;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 6. Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #fef2f2;
+            color: var(--accent-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* 7. Image Slider */
+        .slider-section {
+            background: var(--secondary-bg);
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .slider-container::-webkit-scrollbar { display: none; } /* Chrome */
+
+        .slider-item {
+            flex: 0 0 calc(85% - 1rem);
+            scroll-snap-align: center;
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 640px) { .slider-item { flex: 0 0 400px; } }
+
+        .slider-image-placeholder {
+            aspect-ratio: 4/3;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .slider-content { padding: 1rem; }
+        .slider-content h4 { font-weight: 700; margin-bottom: 0.25rem; }
+        .slider-content p { font-size: 0.875rem; color: var(--text-muted); }
+
+        /* 8. Testimonials */
+        .testimonial-carousel {
+            position: relative;
+            max-width: 500px;
+            margin: 2rem auto;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .testi-slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .testi-slide.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .testi-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #d1d5db;
+            margin: 0 auto 1rem;
+            border: 3px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .testi-avatar i { font-size: 3rem; color: #9ca3af; }
+        .testi-text { font-style: italic; color: var(--text-muted); margin-bottom: 1rem; font-size: 1rem; }
+        .testi-name { font-weight: 700; color: var(--text-main); }
+        .testi-stars { color: #fbbf24; margin-bottom: 0.5rem; }
+
+        /* 9. Bonus Section */
+        .bonus-section {
+            background: #fffbeb; /* Light yellow */
+        }
+        
+        .bonus-card {
+            background: white;
+            border: 2px dashed #fcd34d;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .bonus-badge {
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #f59e0b;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            text-transform: uppercase;
+        }
+
+        .bonus-value {
+            font-size: 0.875rem;
+            color: #d97706;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-decoration: line-through;
+        }
+
+        /* 11. Checkout Section (Lynk.id Style) */
+        .checkout-section {
+            background: var(--secondary-bg);
+        }
+
+        .checkout-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checkout-header h3 { font-size: 1.25rem; font-weight: 800; }
+        .checkout-header .product-name { color: var(--text-muted); font-size: 0.875rem; }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            background: var(--secondary-bg);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-red);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-option {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .payment-option:hover { background: var(--secondary-bg); }
+        .payment-option input[type="radio"] { margin: 0; cursor: pointer; accent-color: var(--accent-red); }
+        .payment-option label { margin: 0; cursor: pointer; flex-grow: 1; font-weight: 500; font-size: 0.875rem; }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .trust-badges i { font-size: 1.25rem; color: #10b981; }
+
+        /* 12. FAQ Section */
+        details {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: "\25BE"; /* Down arrow */
+            font-size: 1.25rem;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::after { transform: rotate(180deg); }
+        details[open] summary { border-bottom: 1px solid var(--border-color); background: var(--secondary-bg); }
+        
+        .faq-content {
+            padding: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* 13. Final CTA Footer */
+        .footer-cta {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .footer-cta .section-title { color: white; }
+
+        /* A. Pop-up Notification */
+        .sales-popup {
+            position: fixed;
+            bottom: 5rem; /* Above mobile sticky CTA */
+            left: 1rem;
+            right: 1rem;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+            border-left: 4px solid var(--accent-red);
+            transform: translateY(150%);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 400px;
+        }
+
+        @media (min-width: 640px) {
+            .sales-popup { right: auto; bottom: 2rem; width: 350px; }
+        }
+
+        .sales-popup.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .popup-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-red);
+        }
+
+        .popup-text { font-size: 0.875rem; flex-grow: 1; }
+        .popup-text strong { color: var(--text-main); }
+        .popup-time { font-size: 0.75rem; color: var(--text-muted); }
+
+        .popup-cta {
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        /* B. Sticky CTA Button (Mobile only) */
+        .mobile-sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+            z-index: 90;
+            display: block;
+        }
+
+        @media (min-width: 640px) {
+            .mobile-sticky-cta { display: none; }
+            .sales-popup { bottom: 2rem; }
+            body { padding-bottom: 0; }
+        }
+
+        /* Pad body so mobile scroll doesn't hide content behind sticky CTA */
+        @media (max-width: 639px) { body { padding-bottom: 5rem; } }
+
+        /* intl-tel-input Overrides to match design */
+        .iti { width: 100%; display: block; }
+        .iti__country-list { z-index: 101 !important; }
+        .iti__flag-container { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+        .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel], .iti--allow-dropdown input[type=text], .iti--separate-dial-code input, .iti--separate-dial-code input[type=tel], .iti--separate-dial-code input[type=text] {
+            padding-left: 95px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header (Sticky) -->
+    <header class="header-sticky">
+        <div class="container header-content">
+            <div class="timer-badge">
+                <i class="ph ph-clock-countdown"></i>
+                <span id="countdownText">Promo: 23:59:59</span>
+            </div>
+            <a href="#checkout" class="btn btn-primary header-cta">Beli Sekarang</a>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero text-center container">
+        <div class="discount-badge" style="display:inline-block; margin-bottom:1rem;">Promo Terbatas</div>
+        <h1>Kuasai JLPT Lebih Cepat dengan Notion System</h1>
+        <p class="lead">Tracker belajar bahasa Jepang All-in-One. Terstruktur, rapi, dan didesain khusus untuk persiapan lulus JLPT.</p>
+        
+        <!-- Mockup Placeholder: Masukkan link gambar Anda pada tag src di bawah ini -->
+        <div class="hero-mockup">
+            <img src="https://placehold.co/800x450/f3f4f6/9ca3af?text=Masukkan+Link+Gambar+Disini+(Hero)" alt="Notion Dashboard Mockup" style="width: 100%; height: auto;">
+        </div>
+
+        <div class="price-tag">
+            <span class="price-crossed">Rp 499.000</span>
+            <span class="price-current">Rp 149.000</span>
+        </div>
+        
+        <a href="#checkout" class="btn btn-primary btn-pulse" style="font-size: 1.125rem;">📝 Ambil Diskon Sekarang</a>
+        <p class="text-muted" style="font-size: 0.875rem; margin-top: 1rem;"><i class="ph-fill ph-lock-key"></i> Akses Selamanya. Bayar Sekali.</p>
+    </section>
+
+    <!-- 3. Product Preview (Video) -->
+    <section id="preview" class="video-section">
+        <div class="container text-center">
+            <h2 class="section-title">Lihat Bagaimana Sistem Ini Bekerja</h2>
+            <p class="section-subtitle">Intip dashboard belajar yang akan merubah cara belajarmu.</p>
+            
+            <div class="ig-video-container">
+                <!-- REPLACE WITH YOUR VIDEO URL OR IMAGE LINK -->
+                <img src="https://placehold.co/400x500/1f2937/ffffff?text=Gambar/Video+Preview" alt="Video Preview" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Problem Section -->
+    <section class="container">
+        <h2 class="section-title text-center">Sering Mengalami Ini Saat Belajar JLPT?</h2>
+        
+        <div class="problem-list">
+            <div class="problem-item">
+                <i class="ph-fill ph-x-circle"></i>
+                <div>
+                    <p><strong>Materi Berantakan:</strong> Catatan kanji, bunpou, dan choukai terpisah di banyak buku.</p>
+                </div>
+            </div>
+            <div class="problem-item">
+                <i class="ph-fill ph-x-circle"></i>
+                <div>
+                    <p><strong>Tidak Konsisten:</strong> Semangat di awal, tapi hilang arah karena tidak ada tracking progress.</p>
+                </div>
+            </div>
+            <div class="problem-item">
+                <i class="ph-fill ph-x-circle"></i>
+                <div>
+                    <p><strong>Lupa Target JLPT:</strong> Kurang persiapan karena tidak ada timeline ujian yang jelas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Solution Section -->
+    <section class="solution">
+        <div class="container text-center">
+            <h2 class="section-title">Kami Ciptakan Solusinya</h2>
+            <p class="text-muted" style="max-width: 600px; margin: 0 auto;">Framework belajar terstruktur dalam satu dashboard Notion. Menggabungkan metode habit-tracking dengan kurikulum JLPT.</p>
+            
+            <div class="solution-visual" style="aspect-ratio: 21/9; padding:0; overflow:hidden;">
+                 <!-- USER IMAGE PLACEHOLDER: Ganti link src di bawah ini -->
+                 <img src="https://placehold.co/800x340/374151/9ca3af?text=Gambar+Solusi/Sistem+Framework" alt="Sistem Framework" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Features Section -->
+    <section class="container">
+        <h2 class="section-title text-center">Semua Yang Kamu Butuhkan</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="ph ph-book-open-text"></i></div>
+                <h3 class="feature-title">Master Kanji & Kosakata</h3>
+                <p class="feature-desc">Database khusus untuk mencatat dan mereview kanji beserta cara bacanya (Onyomi/Kunyomi).</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="ph ph-target"></i></div>
+                <h3 class="feature-title">Habit & Study Tracker</h3>
+                <p class="feature-desc">Pantau konsistensi belajar harianmu dan pastikan kamu siap sebelum hari-H ujian.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="ph ph-folder-open"></i></div>
+                <h3 class="feature-title">Resource Library</h3>
+                <p class="feature-desc">Kumpulkan semua link penting, PDF latihan, dan materi audio dalam satu tempat rapi.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="ph ph-calendar-check"></i></div>
+                <h3 class="feature-title">Exam Countdown Timeline</h3>
+                <p class="feature-desc">Timeline otomatis yang menghitung mundur ke jadwal ujian JLPT (N5 - N1).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Image Slider (Product Details) -->
+    <section class="slider-section">
+        <div class="container text-center" style="margin-bottom: 2rem;">
+            <h2 class="section-title">Geser Untuk Melihat Isi Dashboard</h2>
+            <p class="text-muted text-sm">Geser ke kiri untuk melihat fitur detail.</p>
+        </div>
+        
+        <div class="slider-container">
+            <!-- Slide 1 -->
+            <div class="slider-item">
+                <img src="https://placehold.co/400x300/e5e7eb/6b7280?text=Gambar+Slider+1" alt="Main Dashboard" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;">
+                <div class="slider-content">
+                    <h4>Main Dashboard</h4>
+                    <p>Ringkasan target dan progress belajar harianmu.</p>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slider-item">
+                <img src="https://placehold.co/400x300/e5e7eb/6b7280?text=Gambar+Slider+2" alt="Kanji Database" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;">
+                <div class="slider-content">
+                    <h4>Kanji Database</h4>
+                    <p>Sistem flashcard digital yang terintegrasi.</p>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slider-item">
+                <img src="https://placehold.co/400x300/e5e7eb/6b7280?text=Gambar+Slider+3" alt="Grammar Tracker" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;">
+                <div class="slider-content">
+                    <h4>Grammar (Bunpou) Tracker</h4>
+                    <p>Catat struktur tata bahasa dengan contoh kalimat.</p>
+                </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="slider-item">
+                <img src="https://placehold.co/400x300/e5e7eb/6b7280?text=Gambar+Slider+4" alt="Mock Test Planner" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;">
+                <div class="slider-content">
+                    <h4>Mock Test Planner</h4>
+                    <p>Jadwalkan dan catat skor simulasi ujianmu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Testimonial Section -->
+    <section class="container">
+        <h2 class="section-title text-center">Kata Mereka Yang Sudah Menggunakan</h2>
+        
+        <div class="testimonial-carousel" id="testiCarousel">
+            <!-- Testimonial 1 -->
+            <div class="testi-slide active">
+                <div class="testi-stars">
+                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                </div>
+                <p class="testi-text">"Semenjak pakai template ini, catatan belajarku jadi super rapi. Terutama bagian tracking kanji, sangat membantu untuk persiapan N3!"</p>
+                <div class="testi-avatar"><i class="ph-fill ph-user"></i></div>
+                <div class="testi-name">Andi Setiawan</div>
+                <div class="text-muted" style="font-size: 0.875rem;">Mahasiswa Sastra Jepang</div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="testi-slide">
+                <div class="testi-stars">
+                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                </div>
+                <p class="testi-text">"Dulu selalu pusing nyari catatan grammar. Sekarang semua terpusat di satu dashboard Notion. Desainnya juga estetik bikin semangat belajar."</p>
+                <div class="testi-avatar"><i class="ph-fill ph-user"></i></div>
+                <div class="testi-name">Siti Nurhaliza</div>
+                <div class="text-muted" style="font-size: 0.875rem;">Karyawan Swasta (Persiapan N4)</div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="testi-slide">
+                <div class="testi-stars">
+                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                </div>
+                <p class="testi-text">"Habit trackernya bikin aku komit tiap hari luangin waktu 30 menit. Must have item buat yang mau self-study JLPT!"</p>
+                <div class="testi-avatar"><i class="ph-fill ph-user"></i></div>
+                <div class="testi-name">Bimantara (Bima)</div>
+                <div class="text-muted" style="font-size: 0.875rem;">Self-taught Learner</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Bonus Section -->
+    <section class="bonus-section">
+        <div class="container">
+            <h2 class="section-title text-center">Bonus Spesial Pembelian Hari Ini</h2>
+            
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="bonus-card">
+                    <div class="bonus-badge">Bonus 1</div>
+                    <h3 class="font-bold">Panduan Setup Notion (Video)</h3>
+                    <p class="bonus-value">Senilai Rp 99.000</p>
+                    <p class="text-muted text-sm">Tidak tau cara pakai Notion? Tenang, ada video tutorial lengkap step-by-step.</p>
+                </div>
+                
+                <div class="bonus-card">
+                    <div class="bonus-badge">Bonus 2</div>
+                    <h3 class="font-bold">Mini-Ebook: Tips Lulus JLPT Tanpa Kursus</h3>
+                    <p class="bonus-value">Senilai Rp 79.000</p>
+                    <p class="text-muted text-sm">Strategi rahasia belajar mandiri yang terbukti efektif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10 & 11. Pricing & Checkout Section -->
+    <section id="checkout" class="checkout-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 2.5rem;">
+                <h2 class="section-title">Ambil Promo Spesial Sekarang</h2>
+                <div class="price-tag" style="justify-content: center; margin-bottom: 0.5rem;">
+                    <span class="price-crossed">Rp 499.000</span>
+                    <span class="price-current" style="font-size: 2.5rem; color: var(--accent-red);">Rp 149.000</span>
+                </div>
+                <p class="font-semibold text-muted">Promo berakhir dalam waktu dekat. Jangan tunda lagi.</p>
+            </div>
+
+            <!-- Checkout Form Gateway -->
+            <div class="checkout-card">
+                <div class="checkout-header">
+                    <h3>Form Pemesanan</h3>
+                    <div class="product-name">JLPT Learning System Notion</div>
+                </div>
+
+                <form id="lynkCheckoutForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Nomor WhatsApp Aktif</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="81234567890" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Alamat Email Aktif <small>(Produk dikirim ke email ini)</small></label>
+                        <input type="email" id="email" class="form-control" placeholder="email@contoh.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Metode Pembayaran</label>
+                        <div class="payment-methods">
+                            <!-- Notice these are just UI, actual processing happens via Lynk.id -->
+                            <div class="payment-option">
+                                <input type="radio" name="payment_method" id="qris" value="QRIS" checked>
+                                <label for="qris"><i class="ph ph-qr-code" style="margin-right:0.5rem;"></i> QRIS (OVO, GoPay, Dana, LinkAja)</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" name="payment_method" id="bank" value="Bank Transfer">
+                                <label for="bank"><i class="ph ph-bank" style="margin-right:0.5rem;"></i> Bank Transfer / Virtual Account</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" name="payment_method" id="ewallet" value="E-Wallet">
+                                <label for="ewallet"><i class="ph ph-wallet" style="margin-right:0.5rem;"></i> E-Wallet Khusus</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-primary btn-pulse" style="width: 100%; font-size: 1.125rem;">
+                        <i class="ph-fill ph-lock-key" style="margin-right: 0.5rem;"></i> Beli Sekarang (Rp 149rb)
+                    </button>
+                    
+                    <div class="trust-badges">
+                        <span style="display:flex; align-items:center; gap:0.25rem;"><i class="ph-fill ph-shield-check"></i> Pembayaran Aman via Lynk.id</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. FAQ Section -->
+    <section class="container" style="max-width: 700px;">
+        <h2 class="section-title text-center">Pertanyaan yang Sering Diajukan</h2>
+        
+        <details>
+            <summary>Apakah template ini untuk pemula (N5)?</summary>
+            <div class="faq-content">
+                Tentu saja! Template ini sangat cocok untuk pemula hingga tingkat lanjut (N5 - N1). Anda bisa mengisi database sesuai dengan level yang sedang dipelajari.
+            </div>
+        </details>
+        <details>
+            <summary>Apakah perlu berlangganan Notion Plus?</summary>
+            <div class="faq-content">
+                Tidak perlu. Template ini 100% berjalan lancar dan bisa digunakan di akun Notion gratis (Free Plan).
+            </div>
+        </details>
+        <details>
+            <summary>Bagaimana cara mendapatkan file-nya?</summary>
+            <div class="faq-content">
+                Setelah pembayaran berhasil via Lynk.id, link akses template Notion dan bonus akan otomatis dikirimkan ke email Anda dalam hitungan detik.
+            </div>
+        </details>
+        <details>
+            <summary>Apakah isi materinya otomatis tersedia?</summary>
+            <div class="faq-content">
+                Ini adalah "Sistem Framework Belajar". Kami menyediakan struktur, template database, dan contoh isian. Untuk materi pembelajaran, Anda memasukkan catatan Anda sendiri sehingga lebih personal dan mudah diingat.
+            </div>
+        </details>
+    </section>
+
+    <!-- 13. Final CTA Footer -->
+    <footer class="footer-cta">
+        <div class="container">
+            <h2 class="section-title">Berhenti Belajar Tanpa Arah</h2>
+            <p class="text-muted" style="margin-bottom: 2rem;">Investasi kecil untuk membantu Anda lulus JLPT sesuai target.</p>
+            <a href="#checkout" class="btn btn-primary" style="max-width: 300px;">Akses Template Sekarang</a>
+            
+            <div style="margin-top: 4rem; font-size: 0.875rem; color: #6b7280;">
+                &copy; 2026 JLPT Notion System. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- A. Pop-up Notification Container -->
+    <div id="sales-popup" class="sales-popup">
+        <div class="popup-img"><i class="ph-fill ph-shopping-bag" style="font-size: 1.5rem;"></i></div>
+        <div class="popup-text">
+            <strong id="popupName">Andi</strong> dari <strong id="popupCity">Jakarta</strong> baru saja membeli produk ini.
+            <div class="popup-time">Beberapa menit yang lalu</div>
+        </div>
+        <a href="#checkout" class="popup-cta">Lihat Produk</a>
+    </div>
+
+    <!-- B. Mobile Sticky CTA Bar -->
+    <div class="mobile-sticky-cta">
+        <a href="#checkout" class="btn btn-primary btn-pulse" style="width: 100%; border-radius: 999px;">Beli Sekarang - Rp149rb</a>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Initialize International Phone Input
+            const phoneInputField = document.querySelector("#phone");
+            const iti = window.intlTelInput(phoneInputField, {
+                initialCountry: "id",
+                separateDialCode: true,
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/utils.js",
+            });
+
+            // 1. Countdown Timer Logic (Reset loops every 24h visually)
+            function updateTimer() {
+                const now = new Date();
+                const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+                const diff = endOfDay - now;
+
+                if (diff < 0) return; // Wait for next day
+
+                const hours = Math.floor(diff / 1000 / 60 / 60);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                const hstr = hours < 10 ? '0'+hours : hours;
+                const mstr = minutes < 10 ? '0'+minutes : minutes;
+                const sstr = seconds < 10 ? '0'+seconds : seconds;
+
+                const timerElement = document.getElementById('countdownText');
+                if(timerElement) {
+                    timerElement.innerText = `Promo: ${hstr}:${mstr}:${sstr}`;
+                }
+            }
+            setInterval(updateTimer, 1000);
+            updateTimer();
+
+            // 2. Smooth Scrolling to checkout is handled by CSS (scroll-behavior: smooth)
+            // But we can ensure buttons work well with offset for sticky header if needed.
+
+            // 3. Testimonial Auto-Slide
+            const slides = document.querySelectorAll('.testi-slide');
+            let currentSlide = 0;
+            if(slides.length > 0) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 5000); // Change slide every 5 seconds
+            }
+
+            // 4. Pop-up Notification System
+            const names = ["Andi", "Budi", "Siti", "Rina", "Dimas", "Ayu", "Reza", "Putri", "Dian", "Agus"];
+            const cities = ["Jakarta", "Bandung", "Surabaya", "Yogyakarta", "Semarang", "Malang", "Medan", "Bali"];
+            const popup = document.getElementById('sales-popup');
+            const popupNameEl = document.getElementById('popupName');
+            const popupCityEl = document.getElementById('popupCity');
+
+            function showPopup() {
+                // Randomize data
+                const randomName = names[Math.floor(Math.random() * names.length)];
+                const randomCity = cities[Math.floor(Math.random() * cities.length)];
+                
+                popupNameEl.innerText = randomName;
+                popupCityEl.innerText = randomCity;
+
+                // Show popup
+                popup.classList.add('show');
+
+                // Hide after 4 seconds
+                setTimeout(() => {
+                    popup.classList.remove('show');
+                }, 4000);
+            }
+
+            // Initial delay before first popup
+            setTimeout(() => {
+                showPopup();
+                // Then repeat every 12 seconds
+                setInterval(showPopup, 12000);
+            }, 3000);
+
+            // 5. Checkout Form Redirect Logic (Lynk.id Gateway)
+            const checkoutForm = document.getElementById('lynkCheckoutForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // --- LYNK.ID PRODUCT LINK ---
+            const LYNK_ID_PRODUCT_URL = "https://lynk.id/abroa.g/jmk6067vmozv";
+
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop normal form submission
+
+                const nameInput = document.getElementById('name').value;
+                const emailInput = document.getElementById('email').value;
+                const fullPhoneNumber = iti.getNumber();
+                
+                // Optional: collect payment method for internal tracking if needed, 
+                // but not strictly necessary for Lynk.id generic checkout.
+                // const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+
+                // 1. Change button UI to loading state
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="ph ph-spinner ph-spin" style="margin-right:0.5rem; animation: spin 1s linear infinite;"></i> Memproses...';
+                submitBtn.style.opacity = '0.8';
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.disabled = true;
+
+                // Add simple CSS spin animation if not loaded via phosphor
+                if (!document.getElementById('spin-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'spin-style';
+                    style.innerHTML = '@keyframes spin { 100% { transform: rotate(360deg); } }';
+                    document.head.appendChild(style);
+                }
+
+                // 2. Simulate short processing delay (Trust building UX)
+                setTimeout(() => {
+                    // 3. Build Redirect URL with parameters
+                    // Some checkout systems accept parameters via URL query strings
+                    const queryParams = new URLSearchParams({
+                        name: nameInput,
+                        email: emailInput,
+                        phone: fullPhoneNumber
+                    });
+                    
+                    const redirectUrl = `${LYNK_ID_PRODUCT_URL}?${queryParams.toString()}`;
+
+                    // 4. Redirect user
+                    window.location.href = redirectUrl;
+                    
+                    // Reset button (in case they press "Back" on browser)
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
+                        submitBtn.disabled = false;
+                        checkoutForm.reset();
+                    }, 1000);
+
+                }, 1500); // 1.5 second loading delay
+            });
+
+            // Smooth scroll adjustment for sticky header
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if(targetElement) {
+                        const headerOffset = 60;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                        
+                        // Close popup if the CTA inside popup is clicked
+                        if(this.classList.contains('popup-cta')) {
+                            popup.classList.remove('show');
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
