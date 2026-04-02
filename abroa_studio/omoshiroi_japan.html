@@ -970,7 +970,7 @@
                     </div>
 
                     <button type="submit" id="submitBtn" class="btn btn-primary btn-pulse" style="width: 100%; font-size: 1.125rem;">
-                        <i class="ph-fill ph-lock-key" style="margin-right: 0.5rem;"></i> Beli Sekarang (Rp 149rb)
+                        <i class="ph-fill ph-lock-key" style="margin-right: 0.5rem;"></i> Beli Sekarang (Rp 99rb)
                     </button>
                     
                     <div class="trust-badges">
@@ -1019,7 +1019,7 @@
             <a href="#checkout" class="btn btn-primary" style="max-width: 300px;">Akses Template Sekarang</a>
             
             <div style="margin-top: 4rem; font-size: 0.875rem; color: #6b7280;">
-                &copy; 2026 JLPT Notion System. All rights reserved.
+                &copy; 2026 Omoshiroi Japan.  All rights reserved.  
             </div>
         </div>
     </footer>
@@ -1028,7 +1028,7 @@
     <div id="sales-popup" class="sales-popup">
         <div class="popup-img"><i class="ph-fill ph-shopping-bag" style="font-size: 1.5rem;"></i></div>
         <div class="popup-text">
-            <strong id="popupName">Andi</strong> dari <strong id="popupCity">Jakarta</strong> baru saja membeli produk ini.
+            <strong id="popupName">Andi</strong> baru saja membeli produk ini.
             <div class="popup-time">Beberapa menit yang lalu</div>
         </div>
         <a href="#checkout" class="popup-cta">Lihat Produk</a>
@@ -1052,7 +1052,7 @@
                 utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/utils.js",
             });
 
-            // 1. Countdown Timer Logic (Reset loops every 24h visually)
+            // 1. Countdown Timer Logic (Reset loops every 7D visually)
             function updateTimer() {
                 const now = new Date();
                 const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
@@ -1091,19 +1091,16 @@
             }
 
             // 4. Pop-up Notification System
-            const names = ["Andi", "Budi", "Siti", "Rina", "Dimas", "Ayu", "Reza", "Putri", "Dian", "Agus"];
-            const cities = ["Jakarta", "Bandung", "Surabaya", "Yogyakarta", "Semarang", "Malang", "Medan", "Bali"];
+            const names = ["Andi Kurnia", "Budi Susanto", "Siti Anisa", "Rina Dwi", "Dimas Prakoso", "Ayu Siswati", "Reza Aniliya", "Putri Malaika", "Dian Setiawan", "Agus Siswandi", "Lia Rahmawati", "Rohman Agung", "Fajar Nugroho", "Intan Permatasari", "Bayu Saputra", "Nur Hidayah", "Eko Prasetyo", "Tika Wulandari", "Rizky Ramadhan", "Desi Oktaviani", "Arif Hidayat", "Yuni Kartika", "Hendra Wijaya", "Sri Rahayu", "Ilham Maulana", "Nisa Khairunnisa", "Galih Pratama", "Ratna Sari", "Yoga Prabowo", "Maya Lestari", "Aditya Saputra", "Fitri Handayani", "Bagus Santoso", "Dewi Anggraini", "Randy Setiawan", "Melati Kusuma", "Riko Firmansyah", "Lina Marlina", "Farhan Akbar", "Salsa Nabila", "Wahyu Kurniawan", "Putra Mahendra", "Yusuf Alamsyah", "Aisyah Zahra", "Rian Saputra", "Novi Lestari", "Fikri Hidayat", "Anisa Putri", "Doni Setiawan", "Indah Permata", "Rama Saputra", "Elsa Fitriani", "Zaki Maulana", "Vina Oktavia", "Arman Syahputra", "Tari Wulandari", "Reyhan Pratama", "Nadia Safitri", "Alvin Prakoso", "Riska Amelia", "Ridwan Hakim", "Putri Ayunda", "Hafiz Ramadhan", "Citra Dewi", "Bagas Aditya", "Luthfi Hidayat", "Shinta Sari", "Rizal Firmansyah", "Yola Apriani","Fauzan Akbar", "Rani Permatasari", "Andre Saputra", "Rini Astuti", "Ferry Kurniawan", "Nanda Putri", "Rahmat Hidayat", "Putri Nabila", "Joko Susilo", "Siska Handayani", "Alif Maulana", "Dewi Sartika", "Gunawan Saputra", "Vera Anggraini", "Teguh Prasetyo", "Rika Wulandari", "Zulfan Hidayat", "Mira Oktaviani", "Robby Setiawan", "Linda Sari", "Ardiansyah", "Putri Lestari", "Kurniawan", "Yanti", "Sapriadi", "Halimah", "Fadli", "Sulastri", "Heru Santoso", "Nurmala Sari" ]
             const popup = document.getElementById('sales-popup');
             const popupNameEl = document.getElementById('popupName');
-            const popupCityEl = document.getElementById('popupCity');
 
             function showPopup() {
                 // Randomize data
                 const randomName = names[Math.floor(Math.random() * names.length)];
-                const randomCity = cities[Math.floor(Math.random() * cities.length)];
                 
                 popupNameEl.innerText = randomName;
-                popupCityEl.innerText = randomCity;
+                
 
                 // Show popup
                 popup.classList.add('show');
@@ -1121,65 +1118,71 @@
                 setInterval(showPopup, 12000);
             }, 3000);
 
-            // 5. Checkout Form Redirect Logic (Lynk.id Gateway)
-            const checkoutForm = document.getElementById('lynkCheckoutForm');
-            const submitBtn = document.getElementById('submitBtn');
+           // 5. Checkout Form dengan pengiriman ke FormSubmit + redirect ke Lynk.id
+const checkoutForm = document.getElementById('lynkCheckoutForm');
+const submitBtn = document.getElementById('submitBtn');
 
-            // --- LYNK.ID PRODUCT LINK ---
-            const LYNK_ID_PRODUCT_URL = "https://lynk.id/abroa.g/jmk6067vmozv";
+// GANTI dengan link produk Lynk.id milik Anda
+const LYNK_ID_PRODUCT_URL = "https://lynk.id/abroa.g/jmk6067vmozv/checkout?token=cGFyYW1zPSU1QiU1RCZiaWRfcHJpY2U9MCZxdHlfcHJvZD0xJnNlc3NpZD0mdG90YWxfcHJpY2U9JnRvdGFsX3VuaXQ9";
 
-            checkoutForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // Stop normal form submission
+// Endpoint FormSubmit (tanpa captcha, agar lebih cepat)
+const FORM_SUBMIT_URL = "https://formsubmit.co/abroa.gart@gmail.com";
 
-                const nameInput = document.getElementById('name').value;
-                const emailInput = document.getElementById('email').value;
-                const fullPhoneNumber = iti.getNumber();
-                
-                // Optional: collect payment method for internal tracking if needed, 
-                // but not strictly necessary for Lynk.id generic checkout.
-                // const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+checkoutForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-                // 1. Change button UI to loading state
-                const originalBtnText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="ph ph-spinner ph-spin" style="margin-right:0.5rem; animation: spin 1s linear infinite;"></i> Memproses...';
-                submitBtn.style.opacity = '0.8';
-                submitBtn.style.cursor = 'not-allowed';
-                submitBtn.disabled = true;
+    // Ambil nilai dari form
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    let phone = document.getElementById('phone').value.trim();
+    
+    // Jika menggunakan intl-tel-input, ambil nomor lengkap (dengan kode negara)
+    if (typeof iti !== 'undefined' && iti.getNumber) {
+        phone = iti.getNumber();
+    }
 
-                // Add simple CSS spin animation if not loaded via phosphor
-                if (!document.getElementById('spin-style')) {
-                    const style = document.createElement('style');
-                    style.id = 'spin-style';
-                    style.innerHTML = '@keyframes spin { 100% { transform: rotate(360deg); } }';
-                    document.head.appendChild(style);
-                }
+    const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value || 'QRIS';
 
-                // 2. Simulate short processing delay (Trust building UX)
-                setTimeout(() => {
-                    // 3. Build Redirect URL with parameters
-                    // Some checkout systems accept parameters via URL query strings
-                    const queryParams = new URLSearchParams({
-                        name: nameInput,
-                        email: emailInput,
-                        phone: fullPhoneNumber
-                    });
-                    
-                    const redirectUrl = `${LYNK_ID_PRODUCT_URL}?${queryParams.toString()}`;
+    // Validasi sederhana
+    if (!name || !phone || !email) {
+        alert('Harap lengkapi semua data (Nama, WhatsApp, Email).');
+        return;
+    }
 
-                    // 4. Redirect user
-                    window.location.href = redirectUrl;
-                    
-                    // Reset button (in case they press "Back" on browser)
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalBtnText;
-                        submitBtn.style.opacity = '1';
-                        submitBtn.style.cursor = 'pointer';
-                        submitBtn.disabled = false;
-                        checkoutForm.reset();
-                    }, 1000);
+    // Ubah tombol menjadi loading
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="ph ph-spinner ph-spin" style="margin-right:0.5rem; animation: spin 1s linear infinite;"></i> Mengarahkan ke pembayaran...';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.8';
 
-                }, 1500); // 1.5 second loading delay
-            });
+    // Data yang akan dikirim ke FormSubmit
+    const formData = new FormData();
+    formData.append('_subject', `[Pesanan JLPT Notion] dari ${name}`);
+    formData.append('_captcha', 'false');          // Matikan captcha (opsional)
+    formData.append('_template', 'table');         // Format email rapi
+    formData.append('Nama Lengkap', name);
+    formData.append('Nomor WhatsApp', phone);
+    formData.append('Alamat Email', email);
+    formData.append('Metode Pembayaran', paymentMethod);
+    formData.append('Produk', 'JLPT Learning System Notion');
+    formData.append('Harga', 'Rp 99.000');
+
+    // Kirim data ke FormSubmit secara background (tidak menunggu selesai, tapi tetap capture error)
+    try {
+        await fetch(FORM_SUBMIT_URL, {
+            method: 'POST',
+            body: formData,
+            // mode: 'no-cors' // jika ingin mengabaikan CORS (tapi tidak bisa baca response)
+        });
+        // Tidak perlu menunggu response karena kita tetap redirect
+    } catch (err) {
+        console.warn('Gagal mengirim data ke email, tetapi pembeli tetap diarahkan ke Lynk.id', err);
+        // Tidak menampilkan error ke user agar tidak mengganggu konversi
+    }
+
+    // Redirect ke Lynk.id (pembayaran)
+    window.location.href = LYNK_ID_PRODUCT_URL;
+});
 
             // Smooth scroll adjustment for sticky header
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
