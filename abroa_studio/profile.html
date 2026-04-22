@@ -18,7 +18,7 @@
     }
 
     :root {
-      --bg-gif-url: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3SYbacLHNOgwnWCKbqFnMkrSZKPWu7uf4FJ0jR77QyvLHaVEOBUOlrRqeJq5RHQM68RDaf1mEBNJgMbiIpWnHEvRzhR8fWkoty6b0Llew-pXcSqbWFlJ-EfkRGPwDKS1atf1GVslEqf6lMgtMdwPlJyJUx410Aw49XX48Be7DZxPG2CfPErVp8AwGtSQ/s480/pI43YlhMoPqsE.gif'); /* ← Replace with your own GIF link */
+      --bg-gif-url: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7EWhOORLJO8COuyX0mrYVeLUuiU0VDcSuuMza9A0u4BkLwo1Sxl_PfVOAf0hNMU-Gklvs7_sMtu0moQatNMEwYQEFTHCKzNOWb0A9vD_aPhPVk2ZlDKFz3bvuGCk7qqLlx_W8zy8sxrOMU_Z8A2iQzov81mSWWhQhEc3rUfFqrDrukg4zVAQn8daB11O4/s480/03.GIF'); /* ← Replace with your own GIF link */
       --overlay-color: rgba(0, 0, 0, 0.45);
       --glass-bg: rgba(255, 255, 255, 0.78);
       --glass-border: rgba(255, 255, 255, 0.5);
@@ -142,7 +142,7 @@
       margin-right: auto;
     }
 
-    /* Tabs (Links / Shop) */
+    /* Tabs (Links/ Other Links / Shop) */
     .tabs {
       display: flex;
       gap: 0.8rem;
@@ -219,6 +219,50 @@
       transition: transform var(--transition-fast);
     }
 
+    /* Other Link Buttons (core) */
+    .other-links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .other-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(4px);
+      padding: 1rem 1.2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      transition: all var(--transition-hover);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+
+    .other-link-btn i {
+      font-size: 1.3rem;
+      color: var(--accent);
+      transition: transform 0.2s;
+    }
+
+    /* hover + glow */
+    .other-link-btn:hover {
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 18px 30px -12px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    /* active click feedback (scale + opacity) */
+    .other-link-btn:active, .buy-btn:active, .social-icon:active, .tab-btn:active {
+      transform: scale(0.96);
+      transition: transform var(--transition-fast);
+    }
     /* Shop grid / horizontal scroll on mobile */
     .shop-grid {
       display: grid;
@@ -565,12 +609,18 @@
   <!-- Tabs -->
   <div class="tabs">
     <button class="tab-btn active" data-tab="links">🔗 Links</button>
+    <button class="tab-btn active" data-tab="other links">🌱 Links</button>
     <button class="tab-btn" data-tab="shop">🛍️ Shop</button>
   </div>
 
   <!-- Links Section -->
   <div id="linksSection" class="links-section">
     <div class="links-grid" id="linksGrid"></div>
+  </div>
+
+  <!-- Other Links Section -->
+  <div id="otherlinksSection" class="other-links-section">
+    <div class="other-links-grid" id="otherlinksGrid"></div>
   </div>
 
   <!-- Shop Section (hidden initially) -->
@@ -607,7 +657,15 @@
     { title: "Portfolio", icon: "fas fa-briefcase", url: "https://abroag.site/public/mockups/" },
     { title: "Services", icon: "fas fa-palette", url: "https://abroag.site/services" },
     { title: "Shop", icon: "fas fa-store", url: "https://abroag.site/public/mockups/" },
-    { title: "colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
+    { title: "Colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
+    { title: "Inquiry Our Team", icon: "fas fa-calendar-alt", url: "https://abroag.site/public/talents/hire-talent" }
+  ];
+
+  const otherlinksData = [
+    { title: "Portfolio", icon: "fas fa-briefcase", url: "https://abroag.site/public/mockups/" },
+    { title: "Services", icon: "fas fa-palette", url: "https://abroag.site/services" },
+    { title: "Shop", icon: "fas fa-store", url: "https://abroag.site/public/mockups/" },
+    { title: "Colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
     { title: "Inquiry Our Team", icon: "fas fa-calendar-alt", url: "https://abroag.site/public/talents/hire-talent" }
   ];
 
@@ -664,7 +722,21 @@
       container.appendChild(btn);
     });
   }
-
+function renderOtherLinks() {
+    const container = document.getElementById('linksGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    otherlinksData.forEach(link => {
+      const btn = document.createElement('a');
+      btn.className = 'link-btn';
+      btn.href = link.url;
+      btn.target = '_blank';
+      btn.setAttribute('data-ripple', 'true');
+      btn.innerHTML = `<i class="${link.icon}"></i><span>${link.title}</span>`;
+      container.appendChild(btn);
+    });
+  }
+  
   function renderShop() {
     const container = document.getElementById('shopGrid');
     if (!container) return;
@@ -708,12 +780,14 @@
 
   // ---------- TAB SWITCHING ----------
   const linksSection = document.getElementById('linksSection');
+  const otherlinksSection = document.getElementById('otherlinksSection');
   const shopSection = document.getElementById('shopSection');
   const tabBtns = document.querySelectorAll('.tab-btn');
 
   function switchTab(tabId) {
     if (tabId === 'links') {
       linksSection.classList.remove('hidden-tab');
+      otherlinksSection.classList.add('hidden-tab');
       shopSection.classList.add('hidden-tab');
       tabBtns.forEach(btn => {
         if (btn.getAttribute('data-tab') === 'links') btn.classList.add('active');
@@ -721,6 +795,15 @@
       });
     } else {
       linksSection.classList.add('hidden-tab');
+      linksSection.classList.remove('hidden-tab');
+      shopSection.classList.remove('hidden-tab');
+      tabBtns.forEach(btn => {
+        if (btn.getAttribute('data-tab') === 'otherlinks') btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+    } else {
+      linksSection.classList.add('hidden-tab');
+      linksSection.classList.remove('hidden-tab');
       shopSection.classList.remove('hidden-tab');
       tabBtns.forEach(btn => {
         if (btn.getAttribute('data-tab') === 'shop') btn.classList.add('active');
@@ -757,7 +840,7 @@
 
   // attach ripple to all interactive elements (links, buttons, social icons)
   function attachRipples() {
-    const interactive = document.querySelectorAll('.link-btn, .buy-btn, .social-icon, .tab-btn, .share-trigger, .floating-home');
+    const interactive = document.querySelectorAll('.link-btn, .other-link-btn, .buy-btn, .social-icon, .tab-btn, .share-trigger, .floating-home');
     interactive.forEach(el => {
       el.addEventListener('click', function(e) {
         addRippleEffect(e, this);
@@ -877,11 +960,13 @@
   // ---------- INITIALIZE PAGE ----------
   function init() {
     renderLinks();
+    renderOtherLinks();
     renderShop();
     renderSocialIcons();
     attachRipples();
     // ensure shop starts hidden
     shopSection.classList.add('hidden-tab');
+    otherlinksSection.classList.remove('hidden-tab');
     linksSection.classList.remove('hidden-tab');
     // add click effect to product cards (already covered by ripple)
     // optional magnetic effect? we skip for performance, but modern feel remains
