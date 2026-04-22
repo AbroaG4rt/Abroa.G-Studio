@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Abroa.g Studio — Creative Link Hub</title>
+  <title>Abroa.g Studio — Creative Link Hub | Services</title>
   <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,7 +18,7 @@
     }
 
     :root {
-      --bg-gif-url: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7EWhOORLJO8COuyX0mrYVeLUuiU0VDcSuuMza9A0u4BkLwo1Sxl_PfVOAf0hNMU-Gklvs7_sMtu0moQatNMEwYQEFTHCKzNOWb0A9vD_aPhPVk2ZlDKFz3bvuGCk7qqLlx_W8zy8sxrOMU_Z8A2iQzov81mSWWhQhEc3rUfFqrDrukg4zVAQn8daB11O4/s480/03.GIF'); /* ← Replace with your own GIF link */
+      --bg-gif-url: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7EWhOORLJO8COuyX0mrYVeLUuiU0VDcSuuMza9A0u4BkLwo1Sxl_PfVOAf0hNMU-Gklvs7_sMtu0moQatNMEwYQEFTHCKzNOWb0A9vD_aPhPVk2ZlDKFz3bvuGCk7qqLlx_W8zy8sxrOMU_Z8A2iQzov81mSWWhQhEc3rUfFqrDrukg4zVAQn8daB11O4/s480/03.GIF');
       --overlay-color: rgba(0, 0, 0, 0.45);
       --glass-bg: rgba(255, 255, 255, 0.78);
       --glass-border: rgba(255, 255, 255, 0.5);
@@ -53,7 +53,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.80;          /* transparency ~45% */
+      opacity: 0.80;
       z-index: -2;
       pointer-events: none;
     }
@@ -142,7 +142,7 @@
       margin-right: auto;
     }
 
-    /* Tabs (Links/ Other Links / Shop) */
+    /* Tabs (Links / Services / Shop) */
     .tabs {
       display: flex;
       gap: 0.8rem;
@@ -206,85 +206,39 @@
       transition: transform 0.2s;
     }
 
-    /* hover + glow */
     .link-btn:hover {
       transform: scale(1.02) translateY(-2px);
       box-shadow: 0 18px 30px -12px var(--accent-glow);
       border-color: var(--accent);
     }
 
-    /* active click feedback (scale + opacity) */
-    .link-btn:active, .buy-btn:active, .social-icon:active, .tab-btn:active {
+    .link-btn:active, .buy-btn:active, .social-icon:active, .tab-btn:active, .service-btn:active {
       transform: scale(0.96);
       transition: transform var(--transition-fast);
     }
 
-    /* Other Link Buttons (core) */
-    .other-links-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .other-link-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      background: var(--card-bg);
-      backdrop-filter: blur(4px);
-      padding: 1rem 1.2rem;
-      border-radius: 60px;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 600;
-      font-size: 1rem;
-      border: 1px solid rgba(255,255,255,0.35);
-      transition: all var(--transition-hover);
-      box-shadow: var(--shadow-sm);
-      cursor: pointer;
-    }
-
-    .other-link-btn i {
-      font-size: 1.3rem;
-      color: var(--accent);
-      transition: transform 0.2s;
-    }
-
-    /* hover + glow */
-    .other-link-btn:hover {
-      transform: scale(1.02) translateY(-2px);
-      box-shadow: 0 18px 30px -12px var(--accent-glow);
-      border-color: var(--accent);
-    }
-
-    /* active click feedback (scale + opacity) */
-    .other-link-btn:active, .buy-btn:active, .social-icon:active, .tab-btn:active {
-      transform: scale(0.96);
-      transition: transform var(--transition-fast);
-    }
-    /* Shop grid / horizontal scroll on mobile */
-    .shop-grid {
+    /* Shop grid + Services grid unified style */
+    .shop-grid, .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1.5rem;
     }
 
     @media (max-width: 640px) {
-      .shop-grid {
+      .shop-grid, .services-grid {
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         gap: 1rem;
         padding-bottom: 0.8rem;
       }
-      .product-card {
+      .product-card, .service-card {
         flex: 0 0 80%;
         scroll-snap-align: start;
       }
     }
 
-    .product-card {
+    .product-card, .service-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       border-radius: 1.5rem;
@@ -293,7 +247,7 @@
       border: 1px solid var(--glass-border);
     }
 
-    .product-card:hover {
+    .product-card:hover, .service-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-md);
       border-color: var(--accent);
@@ -307,7 +261,7 @@
       background: #edeef2;
     }
 
-    .product-title {
+    .product-title, .service-title {
       font-weight: 700;
       font-size: 1.1rem;
       margin-top: 0.8rem;
@@ -319,13 +273,13 @@
       margin: 0.3rem 0 0.2rem;
     }
 
-    .product-desc {
+    .product-desc, .service-desc {
       font-size: 0.8rem;
       color: var(--text-secondary);
       margin-bottom: 0.7rem;
     }
 
-    .buy-btn {
+    .buy-btn, .service-btn {
       background: var(--accent);
       border: none;
       padding: 0.6rem 0;
@@ -336,11 +290,21 @@
       transition: all 0.2s;
       color: #1A1E2B;
       font-family: inherit;
+      text-align: center;
+      display: inline-block;
     }
 
-    .buy-btn:hover {
+    .buy-btn:hover, .service-btn:hover {
       filter: brightness(1.06);
       transform: scale(0.98);
+    }
+
+    /* service specific icon */
+    .service-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin: 0.5rem 0 0.2rem;
+      text-align: center;
     }
 
     /* social icons row */
@@ -575,7 +539,7 @@
 <div class="bg-gif-layer"></div>
 <div class="bg-overlay"></div>
 
-<!-- Floating Home Button (links to abroag.site) -->
+<!-- Floating Home Button -->
 <a href="https://abroag.site" target="_blank" class="floating-home">
   <i class="fas fa-crown"></i> Abroa.g
 </a>
@@ -606,10 +570,10 @@
     </div>
   </div>
 
-  <!-- Tabs -->
+  <!-- TABS: Links | Services (new) | Shop -->
   <div class="tabs">
     <button class="tab-btn active" data-tab="links">🔗 Links</button>
-    <button class="tab-btn active" data-tab="other links">🌱 Links</button>
+    <button class="tab-btn" data-tab="services">✨ Services</button>
     <button class="tab-btn" data-tab="shop">🛍️ Shop</button>
   </div>
 
@@ -618,12 +582,12 @@
     <div class="links-grid" id="linksGrid"></div>
   </div>
 
-  <!-- Other Links Section -->
-  <div id="otherlinksSection" class="other-links-section">
-    <div class="other-links-grid" id="otherlinksGrid"></div>
+  <!-- NEW Services Section (middle tab) -->
+  <div id="servicesSection" class="services-section hidden-tab">
+    <div class="services-grid" id="servicesGrid"></div>
   </div>
 
-  <!-- Shop Section (hidden initially) -->
+  <!-- Shop Section -->
   <div id="shopSection" class="shop-section hidden-tab">
     <div class="shop-grid" id="shopGrid"></div>
   </div>
@@ -651,24 +615,17 @@
 </div>
 
 <script>
-  // ---------- EASY ADMIN CUSTOMIZATION ----------
-  // Replace these arrays to update links, products, social media
+  // ---------- ADMIN CUSTOMIZATION ----------
+  // Links data (unchanged)
   const linksData = [
     { title: "Portfolio", icon: "fas fa-briefcase", url: "https://abroag.site/public/mockups/" },
     { title: "Services", icon: "fas fa-palette", url: "https://abroag.site/services" },
     { title: "Shop", icon: "fas fa-store", url: "https://abroag.site/public/mockups/" },
-    { title: "Colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
+    { title: "colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
     { title: "Inquiry Our Team", icon: "fas fa-calendar-alt", url: "https://abroag.site/public/talents/hire-talent" }
   ];
 
-  const otherlinksData = [
-    { title: "Portfolio", icon: "fas fa-briefcase", url: "https://abroag.site/public/mockups/" },
-    { title: "Services", icon: "fas fa-palette", url: "https://abroag.site/services" },
-    { title: "Shop", icon: "fas fa-store", url: "https://abroag.site/public/mockups/" },
-    { title: "Colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
-    { title: "Inquiry Our Team", icon: "fas fa-calendar-alt", url: "https://abroag.site/public/talents/hire-talent" }
-  ];
-
+  // Shop products (unchanged)
   const productsData = [
     {
       img: "https://picsum.photos/id/20/300/200",
@@ -700,6 +657,38 @@
     }
   ];
 
+  // NEW: Services Data (customizable for the middle tab)
+  const servicesData = [
+    {
+      icon: "fas fa-chart-line",
+      title: "Brand Strategy",
+      description: "Market analysis, identity positioning & storytelling.",
+      ctaLink: "https://abroag.site/services/brand-strategy",
+      ctaText: "Explore →"
+    },
+    {
+      icon: "fas fa-laptop-code",
+      title: "Web Design & Dev",
+      description: "Modern, responsive websites with smooth UX.",
+      ctaLink: "https://abroag.site/services/web-design",
+      ctaText: "Explore →"
+    },
+    {
+      icon: "fas fa-film",
+      title: "Motion Graphics",
+      description: "Dynamic visual storytelling & animated assets.",
+      ctaLink: "https://abroag.site/services/motion",
+      ctaText: "Explore →"
+    },
+    {
+      icon: "fas fa-lightbulb",
+      title: "Creative Consulting",
+      description: "Expert guidance to elevate your brand identity.",
+      ctaLink: "https://abroag.site/services/consulting",
+      ctaText: "Learn more →"
+    }
+  ];
+
   const socialData = [
     { platform: "instagram", icon: "fab fa-instagram", url: "https://instagram.com/abroag.studio" },
     { platform: "tiktok", icon: "fab fa-tiktok", url: "https://tiktok.com/@abroag.studio" },
@@ -707,7 +696,7 @@
     { platform: "pinterest", icon: "fab fa-pinterest", url: "https://id.pinterest.com/abroaga/" }
   ];
 
-  // ---------- RENDER DYNAMIC CONTENT ----------
+  // ---------- RENDER FUNCTIONS ----------
   function renderLinks() {
     const container = document.getElementById('linksGrid');
     if (!container) return;
@@ -722,21 +711,7 @@
       container.appendChild(btn);
     });
   }
-function renderOtherLinks() {
-    const container = document.getElementById('linksGrid');
-    if (!container) return;
-    container.innerHTML = '';
-    otherlinksData.forEach(link => {
-      const btn = document.createElement('a');
-      btn.className = 'link-btn';
-      btn.href = link.url;
-      btn.target = '_blank';
-      btn.setAttribute('data-ripple', 'true');
-      btn.innerHTML = `<i class="${link.icon}"></i><span>${link.title}</span>`;
-      container.appendChild(btn);
-    });
-  }
-  
+
   function renderShop() {
     const container = document.getElementById('shopGrid');
     if (!container) return;
@@ -753,8 +728,34 @@ function renderOtherLinks() {
       `;
       container.appendChild(card);
     });
-    // attach buy button events
     document.querySelectorAll('.buy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = btn.getAttribute('data-link');
+        if (url) window.open(url, '_blank');
+        addRippleEffect(e, btn);
+      });
+    });
+  }
+
+  // NEW: render Services for middle tab
+  function renderServices() {
+    const container = document.getElementById('servicesGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    servicesData.forEach(service => {
+      const card = document.createElement('div');
+      card.className = 'service-card';
+      card.innerHTML = `
+        <div class="service-icon"><i class="${service.icon}"></i></div>
+        <div class="service-title">${service.title}</div>
+        <div class="service-desc">${service.description}</div>
+        <button class="service-btn" data-link="${service.ctaLink}">${service.ctaText}</button>
+      `;
+      container.appendChild(card);
+    });
+    // attach event listeners to service buttons
+    document.querySelectorAll('.service-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const url = btn.getAttribute('data-link');
@@ -778,38 +779,34 @@ function renderOtherLinks() {
     });
   }
 
-  // ---------- TAB SWITCHING ----------
+  // ---------- TAB SWITCHING (Links, Services, Shop) ----------
   const linksSection = document.getElementById('linksSection');
-  const otherlinksSection = document.getElementById('otherlinksSection');
+  const servicesSection = document.getElementById('servicesSection');
   const shopSection = document.getElementById('shopSection');
   const tabBtns = document.querySelectorAll('.tab-btn');
 
   function switchTab(tabId) {
+    // hide all sections
+    linksSection.classList.add('hidden-tab');
+    servicesSection.classList.add('hidden-tab');
+    shopSection.classList.add('hidden-tab');
+    
+    // show selected + update active class
     if (tabId === 'links') {
       linksSection.classList.remove('hidden-tab');
-      otherlinksSection.classList.add('hidden-tab');
-      shopSection.classList.add('hidden-tab');
-      tabBtns.forEach(btn => {
-        if (btn.getAttribute('data-tab') === 'links') btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-    } else {
-      linksSection.classList.add('hidden-tab');
-      linksSection.classList.remove('hidden-tab');
+    } else if (tabId === 'services') {
+      servicesSection.classList.remove('hidden-tab');
+    } else if (tabId === 'shop') {
       shopSection.classList.remove('hidden-tab');
-      tabBtns.forEach(btn => {
-        if (btn.getAttribute('data-tab') === 'otherlinks') btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-    } else {
-      linksSection.classList.add('hidden-tab');
-      linksSection.classList.remove('hidden-tab');
-      shopSection.classList.remove('hidden-tab');
-      tabBtns.forEach(btn => {
-        if (btn.getAttribute('data-tab') === 'shop') btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
     }
+    
+    tabBtns.forEach(btn => {
+      if (btn.getAttribute('data-tab') === tabId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
   }
 
   tabBtns.forEach(btn => {
@@ -820,7 +817,7 @@ function renderOtherLinks() {
     });
   });
 
-  // ---------- MICRO-INTERACTIONS: RIPPLE + CLICK FEEDBACK (scale already in CSS) ----------
+  // ---------- RIPPLE EFFECT (micro-interaction) ----------
   function addRippleEffect(event, element) {
     const rect = element.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
@@ -838,9 +835,8 @@ function renderOtherLinks() {
     setTimeout(() => ripple.remove(), 500);
   }
 
-  // attach ripple to all interactive elements (links, buttons, social icons)
   function attachRipples() {
-    const interactive = document.querySelectorAll('.link-btn, .other-link-btn, .buy-btn, .social-icon, .tab-btn, .share-trigger, .floating-home');
+    const interactive = document.querySelectorAll('.link-btn, .buy-btn, .social-icon, .tab-btn, .share-trigger, .floating-home, .service-btn');
     interactive.forEach(el => {
       el.addEventListener('click', function(e) {
         addRippleEffect(e, this);
@@ -848,7 +844,7 @@ function renderOtherLinks() {
     });
   }
 
-  // ---------- SHARE FEATURE ----------
+  // ---------- SHARE FEATURE (unchanged) ----------
   const shareTrigger = document.getElementById('shareTrigger');
   const shareMenu = document.getElementById('shareMenu');
   shareTrigger.addEventListener('click', (e) => {
@@ -897,7 +893,7 @@ function renderOtherLinks() {
     shareMenu.classList.remove('show');
   });
 
-  // ---------- QR CODE MODAL (with download) ----------
+  // ---------- QR CODE MODAL ----------
   const modal = document.getElementById('qrModal');
   const qrContainer = document.getElementById('qrCanvasContainer');
   let currentQRCanvas = null;
@@ -914,9 +910,7 @@ function renderOtherLinks() {
     });
   }
 
-  // Add QR button inside product section? Actually we need a button that shows QR.
-  // We'll add a dedicated floating QR button? The requirement says: "Include a button that opens or shows the barcode/QR image". 
-  // I'll add a small button in the floating corner near share? But better add a separate button in the QR panel? Actually we didn't have dedicated QR button; I'll add a small icon button near share? Or in profile area. For better UX, I add a "QR Code" icon in the bottom right? Or inside the container. Let's add a floating QR button next to share but on left bottom? But not to clutter. I'll add a subtle icon in the lower right corner as "QR" button.
+  // Floating QR button
   const qrFloating = document.createElement('div');
   qrFloating.innerHTML = '<i class="fas fa-qrcode"></i>';
   qrFloating.style.position = 'fixed';
@@ -951,8 +945,6 @@ function renderOtherLinks() {
       alert('QR code not ready');
     }
   });
-
-  // close modal on outside click
   modal.addEventListener('click', (e) => {
     if (e.target === modal) modal.style.display = 'none';
   });
@@ -960,16 +952,12 @@ function renderOtherLinks() {
   // ---------- INITIALIZE PAGE ----------
   function init() {
     renderLinks();
-    renderOtherLinks();
     renderShop();
+    renderServices();     // NEW: services section rendering
     renderSocialIcons();
     attachRipples();
-    // ensure shop starts hidden
-    shopSection.classList.add('hidden-tab');
-    otherlinksSection.classList.remove('hidden-tab');
-    linksSection.classList.remove('hidden-tab');
-    // add click effect to product cards (already covered by ripple)
-    // optional magnetic effect? we skip for performance, but modern feel remains
+    // set default visible section: links (active)
+    switchTab('links');
   }
 
   init();
