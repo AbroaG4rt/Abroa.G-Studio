@@ -25,7 +25,7 @@
       --card-bg: rgba(255, 255, 255, 0.85);
       --text-primary: #1A1E2B;
       --text-secondary: #000000;
-      --accent: #C084FC;
+      --accent: #C084FC;       /* soft purple – modern studio vibe */
       --accent-glow: rgba(192, 132, 252, 0.35);
       --shadow-sm: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
       --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
@@ -42,7 +42,13 @@
       overflow-x: hidden;
     }
 
-    /* ---------- ANIMATED GIF BACKGROUND ---------- */
+    /* Lock body scroll when modal is open */
+    body.modal-open {
+      overflow: hidden;
+      padding-right: var(--scrollbar-width, 0px);
+    }
+
+    /* ---------- ANIMATED GIF BACKGROUND (configurable, semi-transparent) ---------- */
     .bg-gif-layer {
       position: fixed;
       top: 0;
@@ -57,6 +63,8 @@
       z-index: -2;
       pointer-events: none;
     }
+
+    /* Soft blur overlay for extra readability */
     .bg-overlay {
       position: fixed;
       top: 0;
@@ -68,7 +76,7 @@
       z-index: -1;
     }
 
-    /* ---------- MAIN LAYOUT ---------- */
+    /* ---------- GLASS CARD + MAIN LAYOUT ---------- */
     .container {
       max-width: 780px;
       margin: 1.8rem auto;
@@ -76,6 +84,7 @@
       position: relative;
       z-index: 2;
     }
+
     .glass-card {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
@@ -84,11 +93,14 @@
       box-shadow: var(--shadow-sm);
       transition: transform 0.2s, box-shadow 0.2s;
     }
+
+    /* profile section */
     .profile {
       text-align: center;
       padding: 2rem 1.5rem 1.5rem;
       margin-bottom: 1.8rem;
     }
+
     .avatar {
       width: 112px;
       height: 112px;
@@ -98,7 +110,10 @@
       box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
       transition: transform 0.2s ease;
     }
-    .avatar:hover { transform: scale(1.02); }
+    .avatar:hover {
+      transform: scale(1.02);
+    }
+
     .username {
       font-size: 1.9rem;
       font-weight: 800;
@@ -110,6 +125,7 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+
     .verified-badge {
       background: var(--accent);
       font-size: 0.7rem;
@@ -121,6 +137,7 @@
       align-items: center;
       gap: 5px;
     }
+
     .bio {
       color: var(--text-secondary);
       margin-top: 0.8rem;
@@ -131,7 +148,7 @@
       margin-right: auto;
     }
 
-    /* Tabs */
+    /* Tabs (Links / Services / Shop) */
     .tabs {
       display: flex;
       gap: 0.8rem;
@@ -143,6 +160,7 @@
       margin: 0 auto 2rem auto;
       border: 1px solid var(--glass-border);
     }
+
     .tab-btn {
       background: transparent;
       border: none;
@@ -155,14 +173,20 @@
       transition: all 0.2s ease;
       font-family: inherit;
     }
+
     .tab-btn.active {
       background: var(--accent);
       color: #fff;
       box-shadow: 0 6px 14px var(--accent-glow);
     }
 
-    /* Links & Buttons */
-    .links-grid { display: flex; flex-direction: column; gap: 1rem; }
+    /* Link Buttons (core) */
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
     .link-btn {
       display: flex;
       align-items: center;
@@ -181,17 +205,31 @@
       box-shadow: var(--shadow-sm);
       cursor: pointer;
     }
-    .link-btn i { font-size: 1.3rem; color: var(--accent); transition: transform 0.2s; }
+
+    .link-btn i {
+      font-size: 1.3rem;
+      color: var(--accent);
+      transition: transform 0.2s;
+    }
+
     .link-btn:hover {
       transform: scale(1.02) translateY(-2px);
       box-shadow: 0 18px 30px -12px var(--accent-glow);
       border-color: var(--accent);
     }
+
+    .link-btn:active, .buy-btn:active, .social-icon:active, .tab-btn:active, .service-btn:active {
+      transform: scale(0.96);
+      transition: transform var(--transition-fast);
+    }
+
+    /* Shop grid + Services grid unified style */
     .shop-grid, .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1.5rem;
     }
+
     @media (max-width: 640px) {
       .shop-grid, .services-grid {
         display: flex;
@@ -200,8 +238,12 @@
         gap: 1rem;
         padding-bottom: 0.8rem;
       }
-      .product-card, .service-card { flex: 0 0 80%; scroll-snap-align: start; }
+      .product-card, .service-card {
+        flex: 0 0 80%;
+        scroll-snap-align: start;
+      }
     }
+
     .product-card, .service-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -210,11 +252,13 @@
       transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       border: 1px solid var(--glass-border);
     }
+
     .product-card:hover, .service-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-md);
       border-color: var(--accent);
     }
+
     .product-img {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -222,6 +266,25 @@
       border-radius: 1.2rem;
       background: #edeef2;
     }
+
+    .product-title, .service-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 0.8rem;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0.3rem 0 0.2rem;
+    }
+
+    .product-desc, .service-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.7rem;
+    }
+
     .buy-btn, .service-btn {
       background: var(--accent);
       border: none;
@@ -233,13 +296,31 @@
       transition: all 0.2s;
       color: #1A1E2B;
       font-family: inherit;
+      text-align: center;
+      display: inline-block;
     }
+
+    .buy-btn:hover, .service-btn:hover {
+      filter: brightness(1.06);
+      transform: scale(0.98);
+    }
+
+    /* service specific icon */
+    .service-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin: 0.5rem 0 0.2rem;
+      text-align: center;
+    }
+
+    /* social icons row */
     .social-row {
       display: flex;
       justify-content: center;
       gap: 1.5rem;
       margin: 2rem 0 1.5rem;
     }
+
     .social-icon {
       background: var(--glass-bg);
       width: 48px;
@@ -255,6 +336,7 @@
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(4px);
     }
+
     .social-icon:hover {
       transform: scale(1.1);
       background: var(--accent);
@@ -262,7 +344,7 @@
       box-shadow: 0 0 15px var(--accent-glow);
     }
 
-    /* Footer & Privacy link hover */
+    /* footer */
     .footer-links {
       text-align: center;
       font-size: 0.75rem;
@@ -277,11 +359,12 @@
       transition: all 0.2s ease;
       position: relative;
     }
-    #privacyPolicyLink, #termsOfServiceLink {
+    /* Modern hover animation for Terms of Service link */
+    #termsOfServiceLink {
       font-weight: 500;
       cursor: pointer;
     }
-    #privacyPolicyLink:hover, #termsOfServiceLink:hover {
+    #termsOfServiceLink:hover {
       color: #000;
       letter-spacing: 0.3px;
       border-bottom: 1.5px solid #000;
@@ -293,7 +376,7 @@
       margin: 1rem 0 1.5rem;
     }
 
-    /* Floating buttons */
+    /* floating buttons (logo home + share) */
     .floating-home {
       position: fixed;
       top: 1.2rem;
@@ -311,12 +394,15 @@
       font-size: 0.9rem;
       box-shadow: var(--shadow-sm);
     }
-    .floating-home i { margin-right: 6px; }
+    .floating-home i {
+      margin-right: 6px;
+    }
     .floating-home:hover {
       background: var(--accent);
       color: white;
       transform: scale(1.02);
     }
+
     .share-floating {
       position: fixed;
       top: 1.2rem;
@@ -336,6 +422,7 @@
       cursor: pointer;
       box-shadow: var(--shadow-sm);
       border: 1px solid var(--glass-border);
+      transition: all 0.2s;
     }
     .share-trigger:hover {
       background: var(--accent);
@@ -357,9 +444,28 @@
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow-md);
     }
-    .share-menu.show { display: flex; }
+    .share-menu.show {
+      display: flex;
+    }
+    .share-opt {
+      padding: 0.6rem;
+      border-radius: 0.9rem;
+      background: transparent;
+      border: none;
+      font-weight: 500;
+      display: flex;
+      gap: 0.7rem;
+      align-items: center;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: background 0.2s;
+    }
+    .share-opt:hover {
+      background: var(--accent);
+      color: #fff;
+    }
 
-    /* QR Modal (existing) */
+    /* QR MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -384,15 +490,41 @@
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow-md);
     }
+    .modal-content canvas {
+      background: white;
+      padding: 10px;
+      border-radius: 1rem;
+      margin: 1rem auto;
+      width: 180px;
+      height: auto;
+    }
+    .modal-close {
+      margin-top: 1rem;
+      background: var(--accent);
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .download-qr {
+      background: var(--accent);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
 
-    /* ========== TERMS MODAL STYLES (existing) ========== */
+    /* ========== TERMS OF SERVICE MODAL STYLES ========== */
     .tos-modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
@@ -401,25 +533,34 @@
       visibility: hidden;
       opacity: 0;
       transition: visibility 0.2s ease, opacity 0.25s ease;
+      will-change: opacity, visibility;
     }
+
     .tos-modal-overlay.visible {
       visibility: visible;
       opacity: 1;
     }
+
     .tos-modal-container {
       background: #ffffff;
       width: 90%;
       max-width: 750px;
       max-height: 85vh;
       border-radius: 32px;
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       transform: scale(0.96);
       transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      will-change: transform;
     }
-    .tos-modal-overlay.visible .tos-modal-container { transform: scale(1); }
+
+    .tos-modal-overlay.visible .tos-modal-container {
+      transform: scale(1);
+    }
+
+    /* modal header */
     .tos-modal-header {
       display: flex;
       justify-content: space-between;
@@ -428,41 +569,118 @@
       border-bottom: 1px solid #eaeef2;
       background: #ffffff;
     }
+
+    .tos-modal-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111;
+      letter-spacing: -0.3px;
+      margin: 0;
+    }
+
     .tos-close-btn {
       background: none;
       border: none;
       font-size: 1.8rem;
+      line-height: 1;
       cursor: pointer;
       color: #5b6e8c;
       transition: all 0.2s;
+      padding: 0;
       width: 32px;
       height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 40px;
     }
+
     .tos-close-btn:hover {
       background: #f0f2f5;
       color: #000;
       transform: rotate(90deg);
     }
+
+    /* modal body with scroll */
     .tos-modal-body {
       flex: 1;
       overflow-y: auto;
       padding: 1.5rem 1.8rem 2rem;
       scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 #f1f5f9;
     }
-    .tos-modal-body::-webkit-scrollbar { width: 5px; }
-    .tos-modal-body::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
-    .tos-modal-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    .tos-content { font-family: 'Inter', sans-serif; color: #1e293b; }
+
+    .tos-modal-body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .tos-modal-body::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+
+    .tos-modal-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    .tos-modal-body::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* typography inside modal */
+    .tos-content {
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+    }
+
+    .tos-content h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+
     .tos-content h2 {
       font-size: 1.3rem;
       font-weight: 600;
-      margin: 1.5rem 0 0.75rem;
+      margin: 1.5rem 0 0.75rem 0;
+      color: #0f172a;
       border-left: 3px solid #C084FC;
       padding-left: 12px;
     }
-    .tos-content p { font-size: 0.95rem; line-height: 1.5; margin-bottom: 1rem; color: #334155; }
-    .tos-content ul { margin: 0.75rem 0 1rem 1.5rem; }
+
+    .tos-content p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      color: #334155;
+    }
+
+    .tos-content ul, .tos-content ol {
+      margin: 0.75rem 0 1rem 1.5rem;
+    }
+
+    .tos-content li {
+      margin-bottom: 0.4rem;
+      font-size: 0.94rem;
+      line-height: 1.45;
+      color: #334155;
+    }
+
+    .tos-content strong {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .tos-content hr {
+      margin: 1.2rem 0;
+      border: none;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
     .modal-footer-btn {
       background: #f1f5f9;
       border: none;
@@ -471,7 +689,16 @@
       font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
+      color: #1e293b;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
     }
+
+    .modal-footer-btn:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
     .tos-modal-footer {
       padding: 1rem 1.8rem 1.5rem;
       background: #ffffff;
@@ -480,110 +707,7 @@
       justify-content: flex-end;
     }
 
-    /* ========== PRIVACY MODAL STYLES (new, matching modern design) ========== */
-    .privacy-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2001;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.2s ease, opacity 0.25s ease;
-    }
-    .privacy-modal-overlay.visible {
-      visibility: visible;
-      opacity: 1;
-    }
-    .privacy-modal-container {
-      background: #ffffff;
-      width: 90%;
-      max-width: 750px;
-      max-height: 85vh;
-      border-radius: 32px;
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transform: scale(0.96);
-      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
-    .privacy-modal-overlay.visible .privacy-modal-container { transform: scale(1); }
-    .privacy-modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid #eaeef2;
-      background: #ffffff;
-    }
-    .privacy-close-btn {
-      background: none;
-      border: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: #5b6e8c;
-      transition: all 0.2s;
-      width: 32px;
-      height: 32px;
-      border-radius: 40px;
-    }
-    .privacy-close-btn:hover {
-      background: #f0f2f5;
-      color: #000;
-      transform: rotate(90deg);
-    }
-    .privacy-modal-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1.5rem 1.8rem 2rem;
-      scrollbar-width: thin;
-    }
-    .privacy-modal-body::-webkit-scrollbar { width: 5px; }
-    .privacy-modal-body::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
-    .privacy-modal-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    .privacy-content { font-family: 'Inter', sans-serif; color: #1e293b; }
-    .privacy-content h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .privacy-content h2 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin: 1.5rem 0 0.75rem;
-      border-left: 3px solid #C084FC;
-      padding-left: 12px;
-    }
-    .privacy-content p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      color: #334155;
-    }
-    .privacy-content ul {
-      margin: 0.75rem 0 1rem 1.5rem;
-    }
-    .privacy-content li {
-      margin-bottom: 0.4rem;
-      font-size: 0.94rem;
-      color: #334155;
-    }
-    .privacy-modal-footer {
-      padding: 1rem 1.8rem 1.5rem;
-      background: #ffffff;
-      border-top: 1px solid #eef2f6;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    /* ripple & utilities */
+    /* ripple effect container */
     .ripple {
       position: absolute;
       border-radius: 50%;
@@ -593,13 +717,45 @@
       pointer-events: none;
     }
     @keyframes rippleAnim {
-      to { transform: scale(4); opacity: 0; }
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
     }
-    .hidden-tab { display: none; }
+
+    /* hidden utility */
+    .hidden-tab {
+      display: none;
+    }
+
+    /* responsive adjustments */
     @media (max-width: 580px) {
-      .container { padding: 0 1rem; margin: 1rem auto; }
-      .tos-modal-container, .privacy-modal-container { width: 95%; max-height: 90vh; }
-      .tos-modal-body, .privacy-modal-body { padding: 1rem 1.2rem; }
+      .container {
+        padding: 0 1rem;
+        margin: 1rem auto;
+      }
+      .username {
+        font-size: 1.6rem;
+      }
+      .link-btn {
+        padding: 0.85rem 1rem;
+      }
+      .tos-modal-container {
+        width: 95%;
+        max-height: 90vh;
+      }
+      .tos-modal-header h2 {
+        font-size: 1.3rem;
+      }
+      .tos-modal-body {
+        padding: 1rem 1.2rem;
+      }
+      .tos-content h1 {
+        font-size: 1.5rem;
+      }
+      .tos-content h2 {
+        font-size: 1.15rem;
+      }
     }
   </style>
 </head>
@@ -609,11 +765,15 @@
 <div class="bg-overlay"></div>
 
 <!-- Floating Home Button -->
-<a href="https://abroag.site" target="_blank" class="floating-home"><i class="fas fa-crown"></i> Abroa.g</a>
+<a href="https://abroag.site" target="_blank" class="floating-home">
+  <i class="fas fa-crown"></i> Abroa.g
+</a>
 
 <!-- Floating Share Button -->
 <div class="share-floating">
-  <div class="share-trigger" id="shareTrigger"><i class="fas fa-share-alt"></i></div>
+  <div class="share-trigger" id="shareTrigger">
+    <i class="fas fa-share-alt"></i>
+  </div>
   <div class="share-menu" id="shareMenu">
     <button class="share-opt" id="copyLinkBtn"><i class="fas fa-link"></i> Copy link</button>
     <button class="share-opt" id="whatsappShareBtn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
@@ -621,127 +781,151 @@
   </div>
 </div>
 
-<!-- Main Content -->
+<!-- Main Content Container -->
 <div class="container">
+  <!-- Profile Section -->
   <div class="glass-card profile">
     <img class="avatar" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8MS5-7s-lmfs-FKe_c9E73N7Hy-J7mWvqjYcPvYaB9u8RPgniNgB9mKTf5RwkNfPIf1zQ_58ANKxkffXg4vxxxhF7U93CWMNu4qDxuvqnwQz0Mkw2SyKT-aVPHHewV7InNGp2aY-z3r9N2jUd_-MXKNfxYg4aB1zeNHC-cS8C4X43ccqbofoREd0UyKo/s128/2icon.png" alt="Abroa.g Studio Logo">
-    <div class="username">Abroa.g Studio <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></div>
-    <div class="bio">Creative brand and web design studio crafting clean, strategic digital experiences for modern businesses.</div>
+    <div class="username">
+      Abroa.g Studio
+      <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+    <div class="bio">
+      Creative brand and web design studio crafting clean, strategic digital experiences for modern businesses.
+    </div>
   </div>
 
+  <!-- TABS: Links | Services (new) | Shop -->
   <div class="tabs">
     <button class="tab-btn active" data-tab="links">🔗 Links</button>
     <button class="tab-btn" data-tab="services">🌱 Projects</button>
     <button class="tab-btn" data-tab="shop">🛍️ Shop</button>
   </div>
 
-  <div id="linksSection" class="links-section"><div class="links-grid" id="linksGrid"></div></div>
-  <div id="servicesSection" class="services-section hidden-tab"><div class="services-grid" id="servicesGrid"></div></div>
-  <div id="shopSection" class="shop-section hidden-tab"><div class="shop-grid" id="shopGrid"></div></div>
+  <!-- Links Section -->
+  <div id="linksSection" class="links-section">
+    <div class="links-grid" id="linksGrid"></div>
+  </div>
 
+  <!-- Services Section -->
+  <div id="servicesSection" class="services-section hidden-tab">
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+
+  <!-- Shop Section -->
+  <div id="shopSection" class="shop-section hidden-tab">
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+
+  <!-- Social Icons Row -->
   <div class="social-row" id="socialRow"></div>
 
+  <!-- Footer -->
   <div class="footer-links">
-    <a href="#" id="privacyPolicyLink">Privacy Policy</a>
+    <a href="#">Privacy Policy</a>
     <a href="#" id="termsOfServiceLink">Terms of Service</a>
   </div>
   <div class="copyright">© 2025 Abroa.g Studio — all rights reserved</div>
 </div>
 
-<!-- QR Modal -->
+<!-- QR Code Modal -->
 <div id="qrModal" class="modal">
   <div class="modal-content">
     <h3><i class="fas fa-qrcode"></i> Scan & Share</h3>
     <div id="qrCanvasContainer"></div>
-    <button id="downloadQrBtn" class="download-qr">Download PNG</button><br>
+    <button id="downloadQrBtn" class="download-qr">Download PNG</button>
+    <br>
     <button class="modal-close" id="closeModalBtn">Close</button>
   </div>
 </div>
 
-<!-- Terms of Service Modal (existing) -->
+<!-- ========== TERMS OF SERVICE MODAL HTML ========== -->
 <div id="tosModal" class="tos-modal-overlay">
   <div class="tos-modal-container">
     <div class="tos-modal-header">
       <h2><i class="fas fa-file-contract" style="margin-right: 10px; color: #C084FC;"></i> Terms of Service</h2>
       <button class="tos-close-btn" id="closeTosModalBtn" aria-label="Close">&times;</button>
     </div>
-    <div class="tos-modal-body"><div class="tos-content"><!-- existing Terms content, omitted for brevity but kept in final code --><p>Terms content here (same as original)</p></div></div>
-    <div class="tos-modal-footer"><button class="modal-footer-btn" id="closeTosFooterBtn">Close</button></div>
-  </div>
-</div>
+    <div class="tos-modal-body">
+      <div class="tos-content">
+        <h1>Terms of Service</h1>
+        <p><strong>Last Updated: 29 May 2026</strong></p>
+        <p>Welcome to <a href="https://abroag.site" target="_blank">abroag.site</a>.
+        By accessing and using this website, you agree to comply with and be bound by the following Terms of Service. If you do not agree with any part of these terms, please discontinue use of this website.</p>
 
-<!-- ========== PRIVACY POLICY MODAL HTML ========== -->
-<div id="privacyModal" class="privacy-modal-overlay">
-  <div class="privacy-modal-container">
-    <div class="privacy-modal-header">
-      <h2><i class="fas fa-lock" style="margin-right: 10px; color: #C084FC;"></i> Privacy Policy</h2>
-      <button class="privacy-close-btn" id="closePrivacyModalBtn" aria-label="Close">&times;</button>
-    </div>
-    <div class="privacy-modal-body">
-      <div class="privacy-content">
-        <h1>Privacy Policy</h1>
-        <p><strong>Last Updated: April 29, 2026</strong></p>
-        <p>Welcome to <a href="https://abroag.site" target="_blank">abroag.site</a>. Your privacy is important to us. This Privacy Policy explains how we collect, use, protect, and manage your information when you visit our website, including pages such as <a href="https://abroag.site/profile" target="_blank">Profile Page</a>.</p>
-        <p>By accessing this website, you agree to the practices described in this Privacy Policy.</p>
+        <h2>1. Introduction</h2>
+        <p>This website is a personal digital platform managed by Abroag. The website may contain:</p>
+        <ul>
+          <li>blog articles</li>
+          <li>educational content</li>
+          <li>portfolio projects</li>
+          <li>digital resources</li>
+          <li>personal opinions and experiences</li>
+          <li>external links and third-party services</li>
+        </ul>
+        <p>All visitors are expected to use this website responsibly and respectfully.</p>
 
-        <h2>1. Information We Collect</h2>
-        <p>We may collect certain information automatically or voluntarily provided by users, including:</p>
-        <ul><li>Name</li><li>Email address</li><li>Contact information</li><li>Browser type and device information</li><li>IP address</li><li>Pages visited and browsing activity</li><li>Cookies and tracking data</li></ul>
-        <p>If you contact us through forms, email, or comments, we may store the information you provide voluntarily.</p>
+        <h2>2. Acceptance of Terms</h2>
+        <p>By accessing this website, you acknowledge that: you have read these Terms of Service, you understand them, and you agree to be legally bound by them. These terms apply to all visitors, readers, and users of the website.</p>
 
-        <h2>2. How We Use Your Information</h2>
-        <p>The collected information may be used to: improve website performance, respond to inquiries, analyze traffic, prevent spam, maintain security, and deliver relevant content. We do not sell, rent, or trade your personal information.</p>
+        <h2>3. Intellectual Property Rights</h2>
+        <p>Unless otherwise stated, all content available on this website including text, graphics, logos, illustrations, design assets, source code, blog content, branding elements are the intellectual property of Abroag and are protected by applicable copyright and intellectual property laws.</p>
+        <p>You may: share content with proper credit, use content for personal and non-commercial purposes.</p>
+        <p>You may NOT: copy content without permission, republish articles as your own, redistribute paid or exclusive materials, modify content for commercial use without authorization.</p>
 
-        <h2>3. Cookies</h2>
-        <p>This website may use cookies to improve browsing experience. You may disable cookies through browser settings, but some parts may not function properly.</p>
+        <h2>4. User Conduct</h2>
+        <p>Users agree not to: violate applicable laws, distribute spam or malicious content, attempt unauthorized access to the website, interfere with website functionality, use automated systems to scrape or copy website data, impersonate another individual or entity. Any misuse may result in restricted access or legal action if necessary.</p>
 
-        <h2>4. Third-Party Services</h2>
-        <p>We may use services like Google Analytics, AdSense, Meta, or embedded media. These services have their own privacy policies.</p>
+        <h2>5. External Links</h2>
+        <p>This website may contain links to external websites or third-party services. Abroag is not responsible for content accuracy, privacy practices, service availability, or policies of third-party websites. Users access third-party services at their own discretion.</p>
 
-        <h2>5. Data Protection</h2>
-        <p>We implement reasonable security measures, but no method is 100% secure.</p>
+        <h2>6. Content Disclaimer</h2>
+        <p>The content provided on this website is for educational, informational, and personal sharing purposes only. While efforts are made to keep information accurate and updated, Abroag makes no guarantees regarding completeness, reliability, accuracy, or suitability of the information. Any action taken based on the information on this website is at the user's own risk.</p>
 
-        <h2>6. External Links</h2>
-        <p>We are not responsible for privacy practices of external websites.</p>
+        <h2>7. Limitation of Liability</h2>
+        <p>Under no circumstances shall Abroag be held liable for direct or indirect damages, data loss, business interruption, technical issues, or any consequences resulting from the use of this website. Users agree to use this website at their own risk.</p>
 
-        <h2>7. Children's Privacy</h2>
-        <p>This website is not directed to children under 13. If we discover such data, it will be removed.</p>
+        <h2>8. Privacy</h2>
+        <p>Use of this website may involve collection of limited technical information such as browser type, device information, cookies, analytics data. Please refer to the Privacy Policy page for more detailed information regarding data handling practices.</p>
 
-        <h2>8. Your Rights</h2>
-        <p>You may request access, correction, or deletion of your data, or disable cookies. Contact us via details below.</p>
-
-        <h2>9. Changes to This Privacy Policy</h2>
-        <p>We may update this policy at any time. The updated date will be posted.</p>
+        <h2>9. Modifications to Terms</h2>
+        <p>Abroag reserves the right to modify or update these Terms of Service at any time without prior notice. Continued use of the website after changes are published constitutes acceptance of the updated terms.</p>
 
         <h2>10. Contact Information</h2>
-        <p>🌐 <a href="https://abroag.site" target="_blank">abroag.site</a><br>📧 Email: abroa.gart@gmail.com</p>
-        <p>© 2026 abroag.site. All rights reserved.</p>
+        <p>If you have any questions regarding these Terms of Service, you may contact:<br>
+        <strong>Website:</strong> <a href="https://abroag.site" target="_blank">abroag.site</a><br>
+        <strong>Profile Page:</strong> <a href="https://abroag.site/profile" target="_blank">abroag.site/profile</a></p>
+
+        <p><strong>Effective Date: 29 May 2026</strong></p>
       </div>
     </div>
-    <div class="privacy-modal-footer">
-      <button class="modal-footer-btn" id="closePrivacyFooterBtn">Close</button>
+    <div class="tos-modal-footer">
+      <button class="modal-footer-btn" id="closeTosFooterBtn">Close</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ---------- DATA ----------
+  // ---------- ADMIN CUSTOMIZATION ----------
   const linksData = [
     { title: "Product Portfolio", icon: "fas fa-briefcase", url: "https://abroag.site/public/mockups/" },
     { title: "Profile", icon: "fas fa-palette", url: "https://www.rohmanag.fun/" },
-    { title: "Shop", icon: "fas fa-store", url: "https://abroag.site/public/mockups/" },
+    { title: "Other Profile", icon: "fas fa-book-journal-whills", url: "https://scholar.google.com/citations?user=_y5m6v0AAAAJ&hl=id" },
     { title: "colaboration", icon: "fa fa-users", url: "https://abroag.site/public/collaborate" },
     { title: "Inquiry Our Team", icon: "fas fa-calendar-alt", url: "https://abroag.site/public/talents/hire-talent" }
   ];
+
   const productsData = [
-    { img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhkQLMzghmakdaS7pw8e7zaLVeDwMXe-hpt0drclODU3QaWgfSphSkLrO2qohtrTjpnLty_P_eEn9hq_0UEiMe-2vfFeFRiKACd1TWBiZ-VUaJLKRgGL-GGUPLxxN8k2rQaboI6CaSm5KkATq_V4mMUImeXrJGVVmEnoMskMlj03WMUxdj_P-qadYRyCpt/s6048/5010-BtSjU9snGqM-unsplash.jpg", title: "Japanese Learning", price: "Rp.99.000", desc: "Japanese Learning system", affiliateLink: "https://abroag.site/omoshiroi_japan" }
-  ];
+    { img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhkQLMzghmakdaS7pw8e7zaLVeDwMXe-hpt0drclODU3QaWgfSphSkLrO2qohtrTjpnLty_P_eEn9hq_0UEiMe-2vfFeFRiKACd1TWBiZ-VUaJLKRgGL-GGUPLxxN8k2rQaboI6CaSm5KkATq_V4mMUImeXrJGVVmEnoMskMlj03WMUxdj_P-qadYRyCpt/s6048/5010-BtSjU9snGqM-unsplash.jpg", title: "Japanese Learning", price: "Rp.99.000", desc: "Japanese Learning system", affiliateLink: "https://abroag.site/omoshiroi_japan" },
+    ];
+
   const servicesData = [
     { icon: "fa-solid fa-person", title: "Agency Profile", description: "Market analysis, identity positioning & storytelling.", ctaLink: "https://abroag.site/services/brand-strategy", ctaText: "Explore →" },
     { icon: "fa-solid fa-torii-gate", title: "Japanese Learning", description: "Learning japanese by self.", ctaLink: "https://www.omoshiroijpn.my.id/", ctaText: "Explore →" },
     { icon: "fa-brands fa-r-project", title: "Daily BLog", description: "All project and my story.", ctaLink: "https://www.rohmanag.fun/", ctaText: "Explore →" },
     { icon: "fas fa-earth-asia", title: "Feel Fatherless", description: "We support everyone to get out of this issue.", ctaLink: "https://fatherless-assessment.pages.dev/", ctaText: "Learn more →" }
   ];
+
   const socialData = [
     { platform: "instagram", icon: "fab fa-instagram", url: "https://instagram.com/abroag.studio" },
     { platform: "tiktok", icon: "fab fa-tiktok", url: "https://tiktok.com/@abroag.studio" },
@@ -749,7 +933,6 @@
     { platform: "pinterest", icon: "fab fa-pinterest", url: "https://id.pinterest.com/abroaga/" }
   ];
 
-  // ---------- RENDER FUNCTIONS ----------
   function renderLinks() {
     const container = document.getElementById('linksGrid');
     if (!container) return;
@@ -759,10 +942,12 @@
       btn.className = 'link-btn';
       btn.href = link.url;
       btn.target = '_blank';
+      btn.setAttribute('data-ripple', 'true');
       btn.innerHTML = `<i class="${link.icon}"></i><span>${link.title}</span>`;
       container.appendChild(btn);
     });
   }
+
   function renderShop() {
     const container = document.getElementById('shopGrid');
     if (!container) return;
@@ -770,11 +955,25 @@
     productsData.forEach(prod => {
       const card = document.createElement('div');
       card.className = 'product-card';
-      card.innerHTML = `<img class="product-img" src="${prod.img}" alt="${prod.title}"><div class="product-title">${prod.title}</div><div class="price">${prod.price}</div><div class="product-desc">${prod.desc}</div><button class="buy-btn" data-link="${prod.affiliateLink}">Buy →</button>`;
+      card.innerHTML = `
+        <img class="product-img" src="${prod.img}" alt="${prod.title}">
+        <div class="product-title">${prod.title}</div>
+        <div class="price">${prod.price}</div>
+        <div class="product-desc">${prod.desc}</div>
+        <button class="buy-btn" data-link="${prod.affiliateLink}">Buy →</button>
+      `;
       container.appendChild(card);
     });
-    document.querySelectorAll('.buy-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const url = btn.getAttribute('data-link'); if(url) window.open(url, '_blank'); addRippleEffect(e, btn); }));
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = btn.getAttribute('data-link');
+        if (url) window.open(url, '_blank');
+        addRippleEffect(e, btn);
+      });
+    });
   }
+
   function renderServices() {
     const container = document.getElementById('servicesGrid');
     if (!container) return;
@@ -782,49 +981,72 @@
     servicesData.forEach(service => {
       const card = document.createElement('div');
       card.className = 'service-card';
-      card.innerHTML = `<div class="service-icon"><i class="${service.icon}"></i></div><div class="service-title">${service.title}</div><div class="service-desc">${service.description}</div><button class="service-btn" data-link="${service.ctaLink}">${service.ctaText}</button>`;
+      card.innerHTML = `
+        <div class="service-icon"><i class="${service.icon}"></i></div>
+        <div class="service-title">${service.title}</div>
+        <div class="service-desc">${service.description}</div>
+        <button class="service-btn" data-link="${service.ctaLink}">${service.ctaText}</button>
+      `;
       container.appendChild(card);
     });
-    document.querySelectorAll('.service-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const url = btn.getAttribute('data-link'); if(url) window.open(url, '_blank'); addRippleEffect(e, btn); }));
+    document.querySelectorAll('.service-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = btn.getAttribute('data-link');
+        if (url) window.open(url, '_blank');
+        addRippleEffect(e, btn);
+      });
+    });
   }
+
   function renderSocialIcons() {
     const container = document.getElementById('socialRow');
     if (!container) return;
     container.innerHTML = '';
     socialData.forEach(social => {
-      const a = document.createElement('a');
-      a.className = 'social-icon';
-      a.href = social.url;
-      a.target = '_blank';
-      a.innerHTML = `<i class="${social.icon}"></i>`;
-      container.appendChild(a);
+      const iconLink = document.createElement('a');
+      iconLink.className = 'social-icon';
+      iconLink.href = social.url;
+      iconLink.target = '_blank';
+      iconLink.innerHTML = `<i class="${social.icon}"></i>`;
+      container.appendChild(iconLink);
     });
   }
 
-  // ---------- TAB SWITCH ----------
+  // TAB SWITCHING
   const linksSection = document.getElementById('linksSection');
   const servicesSection = document.getElementById('servicesSection');
   const shopSection = document.getElementById('shopSection');
   const tabBtns = document.querySelectorAll('.tab-btn');
+
   function switchTab(tabId) {
     linksSection.classList.add('hidden-tab');
     servicesSection.classList.add('hidden-tab');
     shopSection.classList.add('hidden-tab');
-    if(tabId === 'links') linksSection.classList.remove('hidden-tab');
-    else if(tabId === 'services') servicesSection.classList.remove('hidden-tab');
-    else if(tabId === 'shop') shopSection.classList.remove('hidden-tab');
-    tabBtns.forEach(btn => { if(btn.getAttribute('data-tab') === tabId) btn.classList.add('active'); else btn.classList.remove('active'); });
+    if (tabId === 'links') linksSection.classList.remove('hidden-tab');
+    else if (tabId === 'services') servicesSection.classList.remove('hidden-tab');
+    else if (tabId === 'shop') shopSection.classList.remove('hidden-tab');
+    
+    tabBtns.forEach(btn => {
+      if (btn.getAttribute('data-tab') === tabId) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
   }
-  tabBtns.forEach(btn => btn.addEventListener('click', (e) => { switchTab(btn.getAttribute('data-tab')); addRippleEffect(e, btn); }));
 
-  // RIPPLE
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      switchTab(btn.getAttribute('data-tab'));
+      addRippleEffect(e, btn);
+    });
+  });
+
   function addRippleEffect(event, element) {
     const rect = element.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const ripple = document.createElement('span');
     ripple.className = 'ripple';
-    const x = event.clientX - rect.left - size/2;
-    const y = event.clientY - rect.top - size/2;
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
     ripple.style.width = ripple.style.height = `${size}px`;
     ripple.style.left = `${x}px`;
     ripple.style.top = `${y}px`;
@@ -835,104 +1057,165 @@
     setTimeout(() => ripple.remove(), 500);
   }
 
-  // ---------- GLOBAL SCROLL LOCK (multiple modals support) ----------
-  let activeModalCount = 0;
-  let scrollbarWidthCache = null;
-  function getScrollbarWidth() {
-    if(scrollbarWidthCache !== null) return scrollbarWidthCache;
-    const div = document.createElement('div');
-    div.style.overflow = 'scroll';
-    div.style.width = '50px';
-    div.style.height = '50px';
-    document.body.appendChild(div);
-    const width = div.offsetWidth - div.clientWidth;
-    document.body.removeChild(div);
-    scrollbarWidthCache = width;
-    return width;
+  function attachRipples() {
+    const interactive = document.querySelectorAll('.link-btn, .buy-btn, .social-icon, .tab-btn, .share-trigger, .floating-home, .service-btn');
+    interactive.forEach(el => {
+      el.addEventListener('click', function(e) {
+        addRippleEffect(e, this);
+      });
+    });
   }
-  function updateBodyScrollLock() {
-    if(activeModalCount > 0) {
-      const scrollbarWidth = getScrollbarWidth();
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.classList.add('modal-open');
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-      document.body.classList.remove('modal-open');
-    }
-  }
-  function addModalLock() { activeModalCount++; updateBodyScrollLock(); }
-  function removeModalLock() { activeModalCount = Math.max(0, activeModalCount-1); updateBodyScrollLock(); }
 
-  // ---------- TERMS MODAL (refactored with lock) ----------
-  const tosModal = document.getElementById('tosModal');
-  const openTosLink = document.getElementById('termsOfServiceLink');
-  function openTosModal(e) { if(e) e.preventDefault(); tosModal.classList.add('visible'); addModalLock(); }
-  function closeTosModal() { tosModal.classList.remove('visible'); removeModalLock(); }
-  if(openTosLink) openTosLink.addEventListener('click', openTosModal);
-  document.getElementById('closeTosModalBtn')?.addEventListener('click', closeTosModal);
-  document.getElementById('closeTosFooterBtn')?.addEventListener('click', closeTosModal);
-  tosModal?.addEventListener('click', (e) => { if(e.target === tosModal) closeTosModal(); });
-
-  // ---------- PRIVACY MODAL (new) ----------
-  const privacyModal = document.getElementById('privacyModal');
-  const openPrivacyLink = document.getElementById('privacyPolicyLink');
-  function openPrivacyModal(e) { if(e) e.preventDefault(); privacyModal.classList.add('visible'); addModalLock(); }
-  function closePrivacyModal() { privacyModal.classList.remove('visible'); removeModalLock(); }
-  if(openPrivacyLink) openPrivacyLink.addEventListener('click', openPrivacyModal);
-  document.getElementById('closePrivacyModalBtn')?.addEventListener('click', closePrivacyModal);
-  document.getElementById('closePrivacyFooterBtn')?.addEventListener('click', closePrivacyModal);
-  privacyModal?.addEventListener('click', (e) => { if(e.target === privacyModal) closePrivacyModal(); });
-
-  // ESC key closes whichever modal is open (priority: privacy then terms)
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') {
-      if(privacyModal.classList.contains('visible')) closePrivacyModal();
-      else if(tosModal.classList.contains('visible')) closeTosModal();
-    }
-  });
-
-  // ---------- SHARE / QR CODE (existing unchanged) ----------
+  // ---------- SHARE FEATURE ----------
   const shareTrigger = document.getElementById('shareTrigger');
   const shareMenu = document.getElementById('shareMenu');
-  shareTrigger?.addEventListener('click', (e) => { e.stopPropagation(); shareMenu.classList.toggle('show'); });
-  document.addEventListener('click', (e) => { if(!shareTrigger?.contains(e.target) && !shareMenu?.contains(e.target)) shareMenu?.classList.remove('show'); });
+  shareTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    shareMenu.classList.toggle('show');
+  });
+  document.addEventListener('click', (e) => {
+    if (!shareTrigger.contains(e.target) && !shareMenu.contains(e.target)) shareMenu.classList.remove('show');
+  });
+
   function showToast(msg) {
     const toast = document.createElement('div');
     toast.innerText = msg;
-    toast.style.cssText = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#1A1E2B; color:#fff; padding:8px 18px; border-radius:40px; font-size:0.8rem; z-index:9999; backdrop-filter:blur(8px);';
+    toast.style.position = 'fixed';
+    toast.style.bottom = '30px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.background = '#1A1E2B';
+    toast.style.color = '#fff';
+    toast.style.padding = '8px 18px';
+    toast.style.borderRadius = '40px';
+    toast.style.fontSize = '0.8rem';
+    toast.style.zIndex = '999';
+    toast.style.backdropFilter = 'blur(8px)';
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2000);
   }
-  document.getElementById('copyLinkBtn')?.addEventListener('click', () => { navigator.clipboard.writeText(window.location.href); showToast('✅ Link copied to clipboard'); shareMenu?.classList.remove('show'); });
-  document.getElementById('whatsappShareBtn')?.addEventListener('click', () => { window.open(`https://wa.me/?text=${encodeURIComponent(`Check out Abroa.g Studio: ${window.location.href}`)}`, '_blank'); shareMenu?.classList.remove('show'); });
-  document.getElementById('instagramShareBtn')?.addEventListener('click', () => { if(navigator.share) navigator.share({ title: 'Abroa.g Studio', url: window.location.href }); else { navigator.clipboard.writeText(window.location.href); showToast('📋 Link copied! Share on Instagram story.'); } shareMenu?.classList.remove('show'); });
 
-  // QR code
-  const qrModalElem = document.getElementById('qrModal');
+  document.getElementById('copyLinkBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href);
+    showToast('✅ Link copied to clipboard');
+    shareMenu.classList.remove('show');
+  });
+  document.getElementById('whatsappShareBtn').addEventListener('click', () => {
+    const text = encodeURIComponent(`Check out Abroa.g Studio: ${window.location.href}`);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    shareMenu.classList.remove('show');
+  });
+  document.getElementById('instagramShareBtn').addEventListener('click', () => {
+    if (navigator.share) navigator.share({ title: 'Abroa.g Studio', url: window.location.href });
+    else {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('📋 Link copied! Share on Instagram story.');
+    }
+    shareMenu.classList.remove('show');
+  });
+
+  // ---------- QR CODE MODAL ----------
+  const modal = document.getElementById('qrModal');
   const qrContainer = document.getElementById('qrCanvasContainer');
   let currentQRCanvas = null;
+
   function openQRModal() {
-    qrModalElem.style.display = 'flex';
+    modal.style.display = 'flex';
     qrContainer.innerHTML = '';
-    QRCode.toCanvas(window.location.href, { width: 180, margin: 1 }, (err, canvas) => { if(!err) { qrContainer.appendChild(canvas); currentQRCanvas = canvas; } });
+    QRCode.toCanvas(window.location.href, { width: 180, margin: 1 }, (err, canvas) => {
+      if (err) console.error(err);
+      else {
+        qrContainer.appendChild(canvas);
+        currentQRCanvas = canvas;
+      }
+    });
   }
+
   const qrFloating = document.createElement('div');
   qrFloating.innerHTML = '<i class="fas fa-qrcode"></i>';
-  Object.assign(qrFloating.style, { position:'fixed', bottom:'1.5rem', right:'1.5rem', background:'var(--glass-bg)', backdropFilter:'blur(10px)', width:'48px', height:'48px', borderRadius:'60px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.3rem', cursor:'pointer', border:'1px solid var(--glass-border)', zIndex:'200', boxShadow:'var(--shadow-sm)' });
+  qrFloating.style.position = 'fixed';
+  qrFloating.style.bottom = '1.5rem';
+  qrFloating.style.right = '1.5rem';
+  qrFloating.style.background = 'var(--glass-bg)';
+  qrFloating.style.backdropFilter = 'blur(10px)';
+  qrFloating.style.width = '48px';
+  qrFloating.style.height = '48px';
+  qrFloating.style.borderRadius = '60px';
+  qrFloating.style.display = 'flex';
+  qrFloating.style.alignItems = 'center';
+  qrFloating.style.justifyContent = 'center';
+  qrFloating.style.fontSize = '1.3rem';
+  qrFloating.style.cursor = 'pointer';
+  qrFloating.style.border = '1px solid var(--glass-border)';
+  qrFloating.style.zIndex = '200';
+  qrFloating.style.boxShadow = 'var(--shadow-sm)';
   qrFloating.addEventListener('click', openQRModal);
   document.body.appendChild(qrFloating);
-  document.getElementById('closeModalBtn')?.addEventListener('click', () => { qrModalElem.style.display = 'none'; });
-  document.getElementById('downloadQrBtn')?.addEventListener('click', () => { if(currentQRCanvas) { const link = document.createElement('a'); link.download = 'abroag_qrcode.png'; link.href = currentQRCanvas.toDataURL(); link.click(); } else alert('QR code not ready'); });
-  qrModalElem?.addEventListener('click', (e) => { if(e.target === qrModalElem) qrModalElem.style.display = 'none'; });
 
-  // INIT
+  document.getElementById('closeModalBtn').addEventListener('click', () => { modal.style.display = 'none'; });
+  document.getElementById('downloadQrBtn').addEventListener('click', () => {
+    if (currentQRCanvas) {
+      const link = document.createElement('a');
+      link.download = 'abroag_qrcode.png';
+      link.href = currentQRCanvas.toDataURL();
+      link.click();
+    } else alert('QR code not ready');
+  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+  // ========== TERMS OF SERVICE MODAL LOGIC ==========
+  const tosModalOverlay = document.getElementById('tosModal');
+  const openTosLink = document.getElementById('termsOfServiceLink');
+  const closeButtons = [document.getElementById('closeTosModalBtn'), document.getElementById('closeTosFooterBtn')];
+  
+  let scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  function lockBodyScroll() {
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.classList.add('modal-open');
+  }
+  function unlockBodyScroll() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.body.classList.remove('modal-open');
+  }
+
+  function openTosModal(e) {
+    if (e) e.preventDefault();
+    tosModalOverlay.classList.add('visible');
+    lockBodyScroll();
+  }
+  function closeTosModal() {
+    tosModalOverlay.classList.remove('visible');
+    unlockBodyScroll();
+  }
+  // Event listeners for closing
+  closeButtons.forEach(btn => {
+    if (btn) btn.addEventListener('click', closeTosModal);
+  });
+  // Click on overlay to close
+  tosModalOverlay.addEventListener('click', (e) => {
+    if (e.target === tosModalOverlay) closeTosModal();
+  });
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && tosModalOverlay.classList.contains('visible')) {
+      closeTosModal();
+    }
+  });
+  // Trigger link
+  if (openTosLink) {
+    openTosLink.addEventListener('click', openTosModal);
+  }
+
+  // ---------- INITIALIZE PAGE ----------
   function init() {
-    renderLinks(); renderShop(); renderServices(); renderSocialIcons();
+    renderLinks();
+    renderShop();
+    renderServices();
+    renderSocialIcons();
+    attachRipples();
     switchTab('links');
-    // attach ripple to interactive elements
-    document.querySelectorAll('.link-btn, .buy-btn, .social-icon, .tab-btn, .share-trigger, .floating-home, .service-btn').forEach(el => el.addEventListener('click', function(e) { addRippleEffect(e, this); }));
   }
   init();
 </script>
